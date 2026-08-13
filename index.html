@@ -637,35 +637,35 @@ function buildText(mode) {
   if (mode === 'l1') {
     return [
       model.value          && `Model / ${model.value}`,
-      buyingTime.value     && `, Buying time / ${buyingTime.value}`,
-      dealerName.value      && `, Dealer Name / ${dealerName.value}`,
-      dealerLoc.value       && `, Dealer Location / ${dealerLoc.value}`,
-      l1_bookingName.value && `, Booking Name / ${l1_bookingName.value}`,
-      altNumber.value      && `, Alternate Number / ${altNumber.value}`,
-      testRide.value       && `, Test ride suggestion / ${testRide.value}`,
-      keyEnquiry.value     && `, Key Enquiry / ${keyEnquiry.value}`
-    ].filter(Boolean).join('');
+      buyingTime.value     && `Buying time / ${buyingTime.value}`,
+      dealerName.value      && `Dealer Name / ${dealerName.value}`,
+      dealerLoc.value       && `Dealer Location / ${dealerLoc.value}`,
+      l1_bookingName.value && `Booking Name / ${l1_bookingName.value}`,
+      altNumber.value      && `Alternate Number / ${altNumber.value}`,
+      testRide.value       && `Test ride suggestion / ${testRide.value}`,
+      keyEnquiry.value     && `Key Enquiry / ${keyEnquiry.value}`
+    ].filter(Boolean).join('\n');
   }
   if (mode === 'l2booked') {
     return [
       b2_model.value                 && `Booking Model / ${b2_model.value}`,
-      b2_dealershipName.value        && `, Dealership Name / ${b2_dealershipName.value}`,
-      b2_bookingDate.value           && `, Booking Date / ${b2_bookingDate.value}`,
-      b2_bookingName.value           && `, Booking Name / ${b2_bookingName.value}`,
-      b2_bookingMobile.value         && `, Booking Mobile Number / ${b2_bookingMobile.value}`,
-      b2_expectedPurchaseDate.value  && `, Expected Purchased Date / ${b2_expectedPurchaseDate.value}`
-    ].filter(Boolean).join('');
+      b2_dealershipName.value        && `Dealership Name / ${b2_dealershipName.value}`,
+      b2_bookingDate.value           && `Booking Date / ${b2_bookingDate.value}`,
+      b2_bookingName.value           && `Booking Name / ${b2_bookingName.value}`,
+      b2_bookingMobile.value         && `Booking Mobile Number / ${b2_bookingMobile.value}`,
+      b2_expectedPurchaseDate.value  && `Expected Purchased Date / ${b2_expectedPurchaseDate.value}`
+    ].filter(Boolean).join('\n');
   }
   if (mode === 'l2retail') {
     return [
       r2_model.value            && `Model / ${r2_model.value}`,
-      r2_dateOfPurchase.value   && `, Date of Purchase / ${r2_dateOfPurchase.value}`,
-      r2_dealershipName.value   && `, Dealership Name / ${r2_dealershipName.value}`,
-      r2_dealerLocation.value   && `, Dealer Location / ${r2_dealerLocation.value}`,
-      r2_bookingName.value      && `, Booking Name / ${r2_bookingName.value}`,
-      r2_bookingMobile.value    && `, Booking Mobile Number / ${r2_bookingMobile.value}`,
-      r2_regChassisInvoice.value&& `, Reg. No./Chassis/Invoice No./Order ID / ${r2_regChassisInvoice.value}`
-    ].filter(Boolean).join('');
+      r2_dateOfPurchase.value   && `Date of Purchase / ${r2_dateOfPurchase.value}`,
+      r2_dealershipName.value   && `Dealership Name / ${r2_dealershipName.value}`,
+      r2_dealerLocation.value   && `Dealer Location / ${r2_dealerLocation.value}`,
+      r2_bookingName.value      && `Booking Name / ${r2_bookingName.value}`,
+      r2_bookingMobile.value    && `Booking Mobile Number / ${r2_bookingMobile.value}`,
+      r2_regChassisInvoice.value&& `Reg. No./Chassis/Invoice No./Order ID / ${r2_regChassisInvoice.value}`
+    ].filter(Boolean).join('\n');
   }
   return '';
 }
