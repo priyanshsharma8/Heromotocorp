@@ -675,7 +675,7 @@ function copyData() {
   const text = buildText(currentMode);
   if (isOverWordLimit(text)) { setWordLimitWarning(true); return; }
   copyToClipboard(text);
-  showToast('Copied ✅');
+  showToast('Copied');
 }
 function copyToClipboard(text){
   try{ if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(text).catch(()=>fallbackCopy(text)); } else { fallbackCopy(text); } }catch(e){ fallbackCopy(text); }
