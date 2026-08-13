@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Hero MotoCorp CRM - Sales Call Assistant</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#E31837">
+<meta name="description" content="Hero MotoCorp CRM by Advait — capture enquiry, booking & purchase details with bike info cards.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script>window.APP_VERSION = "1.0.0";</script>
+
+<style>
+:root{
+  --hero-red:#E31837; --hero-darkred:#B71C2C; --hero-gold:#D4A843;
+  --hero-black:#0D0D0D; --hero-dark:#1A1A1A; --hero-gray:#2A2A2A; --hero-lightgray:#3A3A3A;
+  --hero-silver:#C0C0C0; --hero-white:#FFFFFF; --hero-offwhite:#F5F5F5;
+}
+*{position:relative;box-sizing:border-box;}
+body{margin:0;padding:0;font-family:'Inter',system-ui,sans-serif;background:var(--hero-offwhite);}
+html{scroll-behavior:smooth;}
+
+/* ── GLOBAL HEADER ── */
+#global-header{
+  position:fixed;top:0;left:0;right:0;height:58px;z-index:150000;
+  background:rgba(255,255,255,0.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border-bottom:1px solid rgba(227,24,55,0.18);
+  box-shadow:0 2px 24px rgba(0,0,0,0.08);
+  display:flex;align-items:center;padding:0 18px;gap:14px;
+}
+.gh-logo{display:flex;align-items:center;gap:10px;cursor:default;user-select:none;}
+.gh-logo-mark{width:34px;height:34px;border-radius:9px;background:linear-gradient(135deg,var(--hero-red),var(--hero-darkred));display:flex;align-items:center;justify-content:center;color:#fff;font-family:'Space Grotesk',sans-serif;font-weight:800;font-size:16px;box-shadow:0 4px 14px rgba(227,24,55,0.35);}
+.gh-logo-text{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:16px;color:var(--hero-black);letter-spacing:0.2px;}
+.gh-logo-text span{color:var(--hero-red);}
+.gh-sub{font-size:10px;color:rgba(20,16,12,0.35);letter-spacing:1.5px;text-transform:uppercase;margin-left:2px;display:none;}
+@media(min-width:560px){.gh-sub{display:block;}}
+.gh-right{display:flex;align-items:center;gap:10px;margin-left:auto;flex-shrink:0;}
+.hbg-btn{width:40px;height:40px;border-radius:10px;background:rgba(20,16,12,0.04);border:1px solid rgba(20,16,12,0.09);cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:0;transition:background .18s,border-color .18s,transform .14s;}
+.hbg-btn:hover{background:rgba(227,24,55,0.09);border-color:rgba(227,24,55,0.3);transform:scale(1.05);}
+.hbg-bar{display:block;width:20px;height:2px;background:#3a352c;border-radius:2px;transition:transform .3s cubic-bezier(.77,0,.18,1),opacity .2s ease,width .25s ease;}
+.hbg-btn.is-open .hbg-bar:nth-child(1){transform:translateY(6px) rotate(45deg);}
+.hbg-btn.is-open .hbg-bar:nth-child(2){opacity:0;width:0;}
+.hbg-btn.is-open .hbg-bar:nth-child(3){transform:translateY(-6px) rotate(-45deg);}
+
+/* ── DARK MODE ── */
+body.dark-mode{background:#0a0a0a;}
+body.dark-mode #global-header{background:rgba(10,8,8,0.96)!important;border-bottom-color:rgba(227,24,55,0.16)!important;}
+body.dark-mode .gh-logo-text{color:rgba(255,255,255,0.9)!important;}
+body.dark-mode .gh-sub{color:rgba(255,255,255,0.28)!important;}
+body.dark-mode .hbg-btn{background:rgba(255,255,255,0.06)!important;border-color:rgba(255,255,255,0.1)!important;}
+body.dark-mode .hbg-bar{background:var(--hero-gold)!important;}
+body.dark-mode .hero-section{background-color:#050505!important;}
+body.dark-mode .box{background:rgba(255,255,255,0.04)!important;border-color:rgba(255,255,255,0.1)!important;box-shadow:0 10px 40px rgba(0,0,0,0.5)!important;}
+body.dark-mode h2{color:var(--hero-gold)!important;}
+body.dark-mode input,body.dark-mode select{background:rgba(255,255,255,0.07)!important;color:rgba(255,255,255,0.88)!important;}
+body.dark-mode input::placeholder{color:rgba(255,255,255,0.32)!important;}
+body.dark-mode .cst{color:rgba(255,255,255,0.32)!important;background:rgba(255,255,255,0.07)!important;}
+body.dark-mode .cst.has-value{color:rgba(255,255,255,0.88)!important;}
+body.dark-mode .topBtn{background:rgba(255,255,255,0.08)!important;color:rgba(255,255,255,0.72)!important;border-color:rgba(255,255,255,0.14)!important;}
+body.dark-mode .cdrop{background:#1a1714!important;border-color:rgba(255,255,255,0.09)!important;}
+body.dark-mode .di{background:transparent!important;color:rgba(255,255,255,0.8)!important;border-bottom-color:rgba(255,255,255,0.05)!important;}
+body.dark-mode .di:hover,body.dark-mode .di.kb-focus{background:rgba(212,168,67,0.12)!important;color:var(--hero-gold)!important;}
+body.dark-mode select{background-image:url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e")!important;}
+body.dark-mode .bsc{background:rgba(15,13,11,0.85)!important;border-color:rgba(255,255,255,0.1)!important;box-shadow:0 18px 50px rgba(0,0,0,0.6)!important;}
+body.dark-mode .bsc-name{color:var(--hero-gold)!important;}
+body.dark-mode .bsc-price{color:rgba(255,150,120,0.9)!important;}
+body.dark-mode .bsc-tag{color:rgba(255,255,255,0.55)!important;background:rgba(255,255,255,0.06)!important;border-color:rgba(255,255,255,0.1)!important;}
+body.dark-mode .bsc-row{border-bottom-color:rgba(255,255,255,0.07)!important;}
+body.dark-mode .bsc-lbl{color:rgba(255,255,255,0.35)!important;}
+body.dark-mode .bsc-val{color:rgba(255,255,255,0.82)!important;}
+body.dark-mode .bsc-usp li{color:rgba(255,255,255,0.65)!important;}
+body.dark-mode .bsc-why{color:rgba(255,255,255,0.5)!important;background:rgba(255,255,255,0.04)!important;border-color:rgba(255,255,255,0.08)!important;}
+body.dark-mode .bsc-foot{color:rgba(255,255,255,0.28)!important;border-top-color:rgba(255,255,255,0.06)!important;}
+body.dark-mode .bsc-badge{color:var(--hero-gold)!important;background:rgba(0,0,0,0.5)!important;border-color:rgba(212,168,67,0.25)!important;}
+body.dark-mode .re-footer{background:#0a0a0a!important;border-top-color:rgba(212,168,67,0.14)!important;}
+body.dark-mode .re-footer-bar{color:rgba(255,255,255,0.18)!important;border-top-color:rgba(255,255,255,0.05)!important;}
+body.dark-mode .clock-box{background:rgba(212,168,67,0.04)!important;border-color:rgba(212,168,67,0.1)!important;}
+body.dark-mode .clock-num{color:var(--hero-gold)!important;}
+body.dark-mode #_reToast{background:rgba(20,20,20,0.95)!important;}
+body.dark-mode .word-limit-banner{color:#FF7F7F!important;}
+body.dark-mode .hbg-panel{background:#0f0f0f!important;border-left-color:rgba(212,168,67,0.09)!important;}
+body.dark-mode .hbg-header{border-bottom-color:rgba(255,255,255,0.06)!important;}
+body.dark-mode .hbg-title{color:rgba(255,255,255,0.82)!important;}
+body.dark-mode .hbg-footer{color:rgba(255,255,255,0.18)!important;border-top-color:rgba(255,255,255,0.05)!important;}
+body.dark-mode .theme-toggle-section{border-top-color:rgba(255,255,255,0.06)!important;}
+body.dark-mode .tsc-sky{background:linear-gradient(180deg,#0b0d1a 0%,#1a1f3a 55%,#2d2010 100%)!important;}
+body.dark-mode .tsc-stars{opacity:1!important;}
+body.dark-mode .tsc-sun{transform:translateY(-50px) scale(0.6);opacity:0!important;}
+body.dark-mode .tsc-moon{opacity:1!important;transform:translateY(0) scale(1)!important;}
+body.dark-mode .tsc-mountains{background:#2a3028!important;}
+body.dark-mode .tsc-road{background:#1a1814!important;}
+body.dark-mode .tsc-label{background:rgba(0,0,0,0.5)!important;color:rgba(255,255,255,0.8)!important;}
+body.dark-mode * { scrollbar-color:#444 transparent; }
+body.dark-mode ::-webkit-scrollbar-thumb{background:#444!important;}
+
+/* ── HERO / CRM SECTION ── */
+.hero-section{
+  min-height:100vh;padding:clamp(10px,2vw,20px);
+  padding-top:calc(58px + clamp(10px,2vw,20px));
+  background-color:#faf7f0;
+  background-image:radial-gradient(ellipse 60% 45% at 14% 12%,rgba(227,24,55,0.06) 0%,transparent 65%),
+    radial-gradient(ellipse 55% 45% at 88% 88%,rgba(212,168,67,0.08) 0%,transparent 65%);
+  display:flex;flex-direction:column;justify-content:center;transition:background-color .4s ease;overflow:hidden;
+}
+.hero-section::after{
+  content:'HERO MOTOCORP · FILL IT · SHUT IT · FORGET IT';position:absolute;left:50%;bottom:18px;
+  transform:translateX(-50%);font-size:10px;font-weight:700;letter-spacing:4px;
+  color:rgba(154,20,40,0.28);text-transform:uppercase;pointer-events:none;user-select:none;white-space:nowrap;z-index:1;
+}
+@media(max-width:600px){.hero-section::after{font-size:8px;letter-spacing:2px;}}
+
+.crm-stage{display:flex;align-items:stretch;justify-content:center;width:100%;margin:auto;box-sizing:border-box;z-index:2;}
+.crm-stage .box{margin:0;flex:0 0 auto;}
+
+.box{
+  width:min(90vw,500px);margin:auto;padding:clamp(16px,2vw,25px);
+  background:rgba(255,255,255,0.55);backdrop-filter:blur(24px) saturate(1.3);-webkit-backdrop-filter:blur(24px) saturate(1.3);
+  border-radius:15px;border:1px solid rgba(255,255,255,0.6);box-shadow:0 10px 40px rgba(20,15,10,0.12);
+  transition:width .2s ease,padding .2s ease;overflow:hidden;z-index:2;
+}
+.box::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--hero-red) 0%,var(--hero-gold) 100%);}
+h2{text-align:center;color:var(--hero-darkred);margin-bottom:20px;font-size:clamp(22px,2vw,30px);font-family:'Space Grotesk',sans-serif;font-weight:700;}
+input,select{width:100%;padding:10px;margin:8px 0;border-radius:8px;border:none;background:rgba(0,0,0,0.045);color:#1a1714;transition:all .2s ease;height:clamp(38px,4vw,42px);font-size:clamp(13px,1vw,15px);box-sizing:border-box;}
+input::placeholder{color:#8a8174;}
+input:focus,select:focus{outline:none;box-shadow:0 0 10px rgba(212,168,67,0.4),0 0 5px rgba(227,24,55,0.25) inset;transform:scale(1.02);}
+button{padding:10px;margin:6px 0;cursor:pointer;border:none;border-radius:8px;height:38px;font-size:clamp(12px,1vw,14px);font-weight:600;}
+.topBtn{width:32%;background:#eee6d6;color:#1a1714;font-size:clamp(10px,1vw,13px);white-space:nowrap;z-index:1;}
+.copyBtn{width:49%;background:#3cb878;color:#fff;z-index:1;}
+.resetBtn{width:49%;background:#e0563c;color:#fff;z-index:1;}
+.hide{display:none;}
+
+.word-limit-banner{display:none;margin-top:10px;padding:10px 14px;border-radius:8px;background:rgba(255,127,127,0.12);border:1px solid rgba(255,127,127,0.45);color:#c0392b;font-size:12.5px;font-weight:600;text-align:center;}
+.word-limit-banner.show{display:block;}
+
+/* ── CUSTOM DROPDOWN ── */
+.csw{margin:8px 0;z-index:1;}
+.csw.open{z-index:10000;}
+.cst{width:100%;height:clamp(38px,4vw,42px);padding:0 36px 0 10px;background:rgba(0,0,0,0.045);border-radius:8px;color:#8a8174;font-size:15px;cursor:pointer;display:flex;align-items:center;box-sizing:border-box;transition:box-shadow .2s,transform .2s;user-select:none;}
+.cst.has-value{color:#1a1714;}
+.cst::after{content:'';position:absolute;right:10px;top:50%;transform:translateY(-50%);width:16px;height:16px;background-image:url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%233a352c' stroke-width='2'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");background-repeat:no-repeat;background-size:16px;transition:transform .2s;}
+.csw.open .cst::after{transform:translateY(-50%) rotate(180deg);}
+.csw.open .cst,.cst:focus{outline:none;box-shadow:0 0 10px rgba(212,168,67,0.4),0 0 5px rgba(227,24,55,0.25) inset;}
+.cdrop{display:none;position:absolute;top:calc(100% + 4px);left:0;width:100%;background:#ffffff;border:1px solid rgba(20,16,12,0.13);border-radius:10px;max-height:340px;overflow-y:auto;z-index:99999;box-shadow:0 6px 22px rgba(0,0,0,0.12);scrollbar-width:thin;scrollbar-color:#cfc6b3 transparent;padding-bottom:2px;}
+.cdrop.drop-up{top:auto;bottom:calc(100% + 4px);}
+.cdrop::-webkit-scrollbar{width:5px;}
+.cdrop::-webkit-scrollbar-thumb{background:#cfc6b3;border-radius:4px;}
+.csw.open .cdrop{display:block;animation:fadeDown .15s ease;}
+.csw.open .cdrop.drop-up{animation:fadeUp .15s ease;}
+@keyframes fadeDown{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.di{padding:10px 14px;cursor:pointer;color:#3a352c;font-size:13.5px;font-weight:500;display:flex;align-items:center;justify-content:space-between;gap:8px;border-bottom:1px solid rgba(20,16,12,0.05);transition:background .12s;}
+.di:last-child{border-bottom:none;}
+.di:hover{background:rgba(212,168,67,0.09);color:var(--hero-darkred);}
+.di.kb-focus{background:rgba(212,168,67,0.15);color:var(--hero-darkred);outline:none;}
+.di-type{font-size:8.5px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:rgba(20,16,12,0.32);background:rgba(20,16,12,0.05);padding:2px 6px;border-radius:4px;flex-shrink:0;}
+
+/* ── SPEC PANEL / CARD ── */
+.spec-spacer{display:none;}
+#bike-spec-panel{flex:0 0 0;width:0;margin-left:0;align-self:stretch;position:relative;min-height:0;opacity:0;pointer-events:none;overflow:visible;
+  transition:flex-basis .36s cubic-bezier(.22,1,.36,1),width .36s cubic-bezier(.22,1,.36,1),margin-left .36s cubic-bezier(.22,1,.36,1),opacity .3s ease;}
+.crm-stage.stage-wide #bike-spec-panel{flex:0 0 380px;width:380px;margin-left:30px;pointer-events:auto;}
+#bike-spec-panel.bsp-open{opacity:1;}
+#bike-spec-panel .bsc{position:absolute;inset:0;overflow-y:auto;scrollbar-width:thin;scrollbar-color:#cfc6b3 transparent;}
+#bike-spec-panel .bsc::-webkit-scrollbar{width:5px;}
+#bike-spec-panel .bsc::-webkit-scrollbar-thumb{background:#cfc6b3;border-radius:4px;}
+@media(max-width:1180px){
+  .crm-stage{flex-direction:column;align-items:center;}
+  #bike-spec-panel{flex:0 0 auto;width:min(92vw,500px);margin-left:0;align-self:center;}
+  .crm-stage.stage-wide #bike-spec-panel{width:min(92vw,500px);margin-left:0;margin-top:20px;}
+  #bike-spec-panel:not(.bsp-open){display:none;}
+  #bike-spec-panel .bsc{position:relative;inset:auto;max-height:70vh;}
+}
+
+.bsc{position:relative;border-radius:18px;overflow:hidden;background:rgba(255,255,255,0.72);backdrop-filter:blur(24px) saturate(1.3);-webkit-backdrop-filter:blur(24px) saturate(1.3);
+  border:1px solid rgba(255,255,255,0.6);box-shadow:0 18px 50px rgba(20,15,10,0.18);}
+.bsc::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;z-index:2;background:linear-gradient(90deg,var(--hero-red),var(--hero-gold));}
+.bsc-top{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;padding:18px 18px 4px;}
+.bsc-name{font-size:19px;font-weight:800;color:var(--hero-darkred);line-height:1.25;font-family:'Space Grotesk',sans-serif;}
+.bsc-badge{font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--hero-darkred);background:rgba(227,24,55,0.08);border:1px solid rgba(227,24,55,0.18);padding:3px 9px;border-radius:5px;white-space:nowrap;flex-shrink:0;}
+.bsc-category{padding:0 18px;font-size:11.5px;color:rgba(20,16,12,0.42);line-height:1.5;}
+.bsc-price{padding:8px 18px 2px;font-size:15px;font-weight:800;color:var(--hero-red);font-variant-numeric:tabular-nums;}
+.bsc-block-lbl{font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(20,16,12,0.32);padding:12px 18px 6px;display:flex;align-items:center;gap:8px;}
+.bsc-block-lbl::before{content:'';width:14px;height:1.5px;background:rgba(227,24,55,0.5);border-radius:2px;}
+.bsc-tags{display:flex;flex-wrap:wrap;gap:5px;padding:2px 18px 8px;}
+.bsc-tag{font-size:9px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:rgba(20,16,12,0.5);background:rgba(20,16,12,0.05);border:1px solid rgba(20,16,12,0.1);padding:3px 8px;border-radius:5px;}
+.bsc-specs{padding:2px 18px 8px;}
+.bsc-row{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;padding:7px 0;border-bottom:1px solid rgba(20,16,12,0.06);}
+.bsc-row:last-child{border-bottom:none;}
+.bsc-lbl{font-size:9.5px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:rgba(20,16,12,0.32);flex-shrink:0;padding-top:1px;white-space:nowrap;}
+.bsc-val{font-size:12px;font-weight:600;color:rgba(20,16,12,0.78);text-align:right;line-height:1.45;}
+.bsc-usp{margin:0;padding:2px 34px 8px 34px;list-style:disc;}
+.bsc-usp li{font-size:11.5px;color:rgba(20,16,12,0.62);line-height:1.6;margin-bottom:2px;}
+.bsc-why{margin:6px 18px 12px;padding:9px 12px;font-size:11px;line-height:1.55;color:rgba(154,20,40,0.85);background:rgba(212,168,67,0.08);border:1px solid rgba(212,168,67,0.22);border-radius:8px;}
+.bsc-foot{padding:9px 18px 14px;font-size:9.5px;letter-spacing:.3px;text-align:center;color:rgba(20,16,12,0.3);border-top:1px solid rgba(20,16,12,0.05);}
+.bsc-empty{padding:60px 24px;text-align:center;color:rgba(20,16,12,0.28);font-size:13px;}
+
+/* ── FOOTER ── */
+.re-footer{width:100%;margin-top:0;background:#f0ebe0;border-top:2px solid rgba(227,24,55,0.12);box-sizing:border-box;position:relative;z-index:10;}
+.re-footer-inner{max-width:900px;margin:0 auto;padding:30px 40px 20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px;}
+.re-footer-made{font-size:12.5px;color:rgba(20,16,12,0.45);}
+.re-footer-made strong{color:var(--hero-darkred);}
+.clock-box{background:rgba(212,168,67,0.05);border:1px solid rgba(212,168,67,0.14);border-radius:11px;padding:10px 16px;display:flex;align-items:center;gap:10px;}
+.clock-time{display:flex;align-items:baseline;gap:2px;}
+.clock-num{font-size:18px;font-weight:300;color:var(--hero-darkred);letter-spacing:1px;font-variant-numeric:tabular-nums;line-height:1;}
+.clock-sep{font-size:15px;font-weight:200;color:rgba(154,20,40,0.25);padding:0 1px;}
+.clock-ampm{font-size:10px;font-weight:600;color:rgba(154,20,40,0.5);letter-spacing:1px;align-self:flex-end;padding-bottom:1px;}
+.clock-date{font-size:10.5px;color:rgba(20,16,12,0.35);}
+.re-footer-bar{border-top:1px solid rgba(20,16,12,0.06);text-align:center;padding:10px 16px;color:rgba(20,16,12,0.22);font-size:11px;letter-spacing:0.4px;}
+.re-footer-bar span{color:rgba(154,20,40,0.4);}
+
+/* ── SIDE PANEL (hamburger) ── */
+.hbg-overlay{position:fixed;inset:0;background:rgba(0,0,0,0);z-index:100000;pointer-events:none;transition:background .35s ease;}
+.hbg-overlay.is-open{background:rgba(0,0,0,0.5);pointer-events:all;}
+.hbg-panel{position:fixed;top:0;right:0;height:100%;width:min(380px,92vw);z-index:200001;background:#ffffff;border-left:1px solid rgba(20,16,12,0.08);display:flex;flex-direction:column;transform:translateX(100%);transition:transform .38s cubic-bezier(.77,0,.18,1);box-shadow:-8px 0 40px rgba(0,0,0,0.12);overflow:hidden;}
+.hbg-panel.is-open{transform:translateX(0);}
+.hbg-header{display:flex;align-items:center;justify-content:space-between;padding:26px 28px 22px;border-bottom:1px solid rgba(20,16,12,0.07);flex-shrink:0;}
+.hbg-title{font-size:14px;font-weight:700;letter-spacing:0.4px;color:rgba(20,16,12,0.82);}
+.hbg-close{width:40px;height:40px;border-radius:10px;background:rgba(20,16,12,0.04);border:1px solid rgba(20,16,12,0.09);color:rgba(20,16,12,0.45);font-size:20px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .18s,color .18s,border-color .18s;}
+.hbg-close:hover{background:rgba(212,168,67,0.1);border-color:rgba(212,168,67,0.3);color:var(--hero-darkred);}
+.hbg-body{flex:1;overflow-y:auto;padding:28px 28px 16px;}
+.hbg-footer{padding:18px 28px;border-top:1px solid rgba(20,16,12,0.06);text-align:center;font-size:11px;color:rgba(20,16,12,0.18);letter-spacing:0.5px;flex-shrink:0;}
+
+.theme-toggle-section{margin-top:4px;}
+.theme-scene-card{width:100%;height:88px;border-radius:18px;cursor:pointer;position:relative;overflow:hidden;border:none;padding:0;transition:transform .18s ease,box-shadow .22s ease;display:block;}
+.theme-scene-card:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(0,0,0,0.14);}
+.theme-scene-card:active{transform:scale(0.98);}
+.tsc-sky{position:absolute;inset:0;background:linear-gradient(180deg,#87CEEB 0%,#b8e0f7 55%,#fde8c8 100%);transition:background 0.6s ease;}
+.tsc-stars{position:absolute;inset:0;opacity:0;background-image:radial-gradient(1px 1px at 15% 18%,#fff 50%,transparent 52%),radial-gradient(1.5px 1.5px at 30% 12%,#fff 50%,transparent 52%),radial-gradient(1px 1px at 55% 22%,#fff 50%,transparent 52%),radial-gradient(1px 1px at 70% 10%,#fff 50%,transparent 52%),radial-gradient(1.5px 1.5px at 82% 20%,#fff 50%,transparent 52%),radial-gradient(1px 1px at 92% 14%,#fff 50%,transparent 52%),radial-gradient(1px 1px at 45% 8%,#fff 50%,transparent 52%);transition:opacity 0.5s ease;}
+.tsc-sun{position:absolute;top:14px;right:20px;width:30px;height:30px;border-radius:50%;background:radial-gradient(circle at 40% 35%,#fff5a0,#FFD700 55%,#f5a800);box-shadow:0 0 18px 6px rgba(255,215,0,0.45);transition:transform 0.55s cubic-bezier(.77,0,.18,1),opacity 0.4s ease;}
+.tsc-moon{position:absolute;top:14px;right:20px;width:26px;height:26px;border-radius:50%;background:#e8e8d0;box-shadow:inset -5px -2px 0 0 #b8b8a0;opacity:0;transform:translateY(-20px) scale(0.7);transition:transform 0.55s cubic-bezier(.77,0,.18,1),opacity 0.4s ease;}
+.tsc-mountains{position:absolute;bottom:22px;left:0;right:0;height:36px;clip-path:polygon(0% 100%,0% 55%,8% 32%,16% 55%,26% 18%,38% 52%,48% 28%,60% 56%,70% 34%,82% 58%,92% 25%,100% 50%,100% 100%);background:#8fb08a;transition:background 0.5s ease;}
+.tsc-road{position:absolute;bottom:0;left:0;right:0;height:22px;background:#c8bfb2;transition:background 0.5s ease;}
+.tsc-road::after{content:'';position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:60%;height:2px;background:repeating-linear-gradient(90deg,rgba(255,255,255,0.7) 0,rgba(255,255,255,0.7) 14px,transparent 14px,transparent 26px);}
+.tsc-label{position:absolute;bottom:26px;left:16px;background:rgba(255,255,255,0.75);backdrop-filter:blur(4px);border-radius:20px;padding:3px 10px;font-size:10px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:#3a352c;transition:background 0.4s,color 0.4s;}
+.hbg-note{margin-top:16px;padding:11px 14px;background:rgba(212,168,67,0.05);border:1px solid rgba(212,168,67,0.14);border-radius:10px;font-size:11px;color:rgba(20,16,12,0.42);line-height:1.6;}
+
+/* ── TOAST + CONFIRM ── */
+#_reToast{position:fixed;left:50%;bottom:34px;transform:translateX(-50%) translateY(16px);background:rgba(20,20,20,.92);color:#fff;padding:12px 22px;border-radius:12px;font-weight:600;font-size:15px;letter-spacing:.2px;box-shadow:0 10px 30px rgba(0,0,0,.35);opacity:0;pointer-events:none;z-index:200000;transition:opacity .2s ease,transform .2s ease;}
+#_reToast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+.re-confirm-ov{position:fixed;inset:0;background:rgba(0,0,0,.42);backdrop-filter:blur(3px);display:flex;align-items:center;justify-content:center;z-index:200001;opacity:0;transition:opacity .2s ease;padding:20px;}
+.re-confirm-ov.show{opacity:1;}
+.re-confirm-box{background:#fff;border-radius:18px;max-width:380px;width:100%;padding:24px 24px 18px;box-shadow:0 24px 70px rgba(0,0,0,.4);transform:scale(.96);transition:transform .2s cubic-bezier(.22,1,.36,1);}
+.re-confirm-ov.show .re-confirm-box{transform:scale(1);}
+.re-confirm-title{font-size:19px;font-weight:800;color:#1a1a1a;margin-bottom:8px;}
+.re-confirm-msg{font-size:14px;color:#555;line-height:1.5;margin-bottom:20px;}
+.re-confirm-actions{display:flex;gap:12px;justify-content:flex-end;}
+.re-confirm-actions button{border:none;border-radius:10px;padding:10px 20px;font-weight:700;font-size:14px;cursor:pointer;transition:filter .15s;}
+.re-confirm-actions button:hover{filter:brightness(.95);}
+.re-confirm-cancel{background:#ececec;color:#333;}
+.re-confirm-ok{background:var(--hero-red);color:#fff;}
+body.dark-mode .re-confirm-box{background:#161311!important;}
+body.dark-mode .re-confirm-title{color:#eee!important;}
+body.dark-mode .re-confirm-msg{color:#aaa!important;}
+body.dark-mode .re-confirm-cancel{background:#2a2a2a!important;color:#ddd!important;}
+
+@keyframes entry-shake{0%,100%{transform:translateX(0);}20%{transform:translateX(-6px);}40%{transform:translateX(6px);}60%{transform:translateX(-4px);}80%{transform:translateX(4px);}}
+</style>
+</head>
+<body>
+
+<!-- ===== GLOBAL HEADER ===== -->
+<header id="global-header" role="banner">
+  <div class="gh-logo">
+    <div class="gh-logo-mark">H</div>
+    <div class="gh-logo-text">Hero <span>MotoCorp</span></div>
+    <div class="gh-sub">Sales CRM</div>
+  </div>
+  <div class="gh-right">
+    <button class="hbg-btn" id="hbgBtn" aria-label="Open menu" aria-expanded="false" aria-controls="hbgPanel">
+      <span class="hbg-bar"></span><span class="hbg-bar"></span><span class="hbg-bar"></span>
+    </button>
+  </div>
+</header>
+
+<div class="hbg-overlay" id="hbgOverlay" aria-hidden="true"></div>
+<nav class="hbg-panel" id="hbgPanel" aria-label="Settings panel" aria-hidden="true">
+  <div class="hbg-header">
+    <div class="hbg-title">Settings</div>
+    <button class="hbg-close" id="hbgClose" aria-label="Close menu">✕</button>
+  </div>
+  <div class="hbg-body">
+    <div class="theme-toggle-section">
+      <button class="theme-scene-card" id="hbgThemeSlider" aria-label="Toggle day/night theme" tabindex="0">
+        <div class="tsc-sky"></div>
+        <div class="tsc-stars"></div>
+        <div class="tsc-sun"></div>
+        <div class="tsc-moon"></div>
+        <div class="tsc-mountains"></div>
+        <div class="tsc-road"></div>
+        <div class="tsc-label" id="hbgThemeTitle">☀️ Day Mode</div>
+      </button>
+    </div>
+    <div class="hbg-note">Hover or select any <span style="color:var(--hero-darkred);font-weight:600;">Model</span> in the form to see its full spec &amp; USP card appear alongside the CRM box.</div>
+  </div>
+  <div class="hbg-footer">Hero MotoCorp CRM · Local &amp; Offline</div>
+</nav>
+
+<!-- ===== HERO / CRM SECTION ===== -->
+<div class="hero-section" id="heroSection">
+  <div class="crm-stage">
+    <div class="spec-spacer" aria-hidden="true"></div>
+    <div class="box">
+      <h2>Hero MotoCorp CRM</h2>
+      <button class="topBtn" onclick="setMode('l1')">L1</button>
+      <button class="topBtn" onclick="setMode('l2booked')">L2 Booked</button>
+      <button class="topBtn" onclick="setMode('l2retail')">L2 Retail</button>
+
+      <!-- ===== L1 ===== -->
+      <div id="l1Section">
+        <div class="csw" id="wrap_model"><div class="cst" id="trig_model" tabindex="0">Select Model</div><div class="cdrop" id="drop_model"></div></div>
+        <input type="hidden" id="model">
+        <input id="buyingTime" placeholder="Buying time">
+        <input id="dealerNameLoc" placeholder="Dealer Name / Location">
+        <input id="l1_bookingName" placeholder="Booking Name">
+        <input id="altNumber" placeholder="Alternate Number">
+        <input id="testRide" placeholder="Test ride suggestion">
+        <input id="keyEnquiry" placeholder="Key Enquiry">
+      </div>
+
+      <!-- ===== L2 - BOOKED ===== -->
+      <div id="l2BookedSection" class="hide">
+        <div class="csw" id="wrap_b2_model"><div class="cst" id="trig_b2_model" tabindex="0">Select Booking Model</div><div class="cdrop" id="drop_b2_model"></div></div>
+        <input type="hidden" id="b2_model">
+        <input id="b2_dealershipName" placeholder="Dealership Name">
+        <input id="b2_bookingDate" placeholder="Booking Date">
+        <input id="b2_bookingName" placeholder="Booking Name">
+        <input id="b2_bookingMobile" placeholder="Booking Mobile Number">
+        <input id="b2_expectedPurchaseDate" placeholder="Expected Purchased Date">
+      </div>
+
+      <!-- ===== L2 - RETAIL ===== -->
+      <div id="l2RetailSection" class="hide">
+        <div class="csw" id="wrap_r2_model"><div class="cst" id="trig_r2_model" tabindex="0">Select Model</div><div class="cdrop" id="drop_r2_model"></div></div>
+        <input type="hidden" id="r2_model">
+        <input id="r2_dateOfPurchase" placeholder="Date of Purchase">
+        <input id="r2_dealershipName" placeholder="Dealership Name">
+        <input id="r2_dealerLocation" placeholder="Dealer Location">
+        <input id="r2_bookingName" placeholder="Booking Name">
+        <input id="r2_bookingMobile" placeholder="Booking Mobile Number">
+        <input id="r2_regChassisInvoice" placeholder="Reg. No. / Chassis / Invoice No. / Order ID">
+      </div>
+
+      <div style="display:flex;justify-content:space-between;position:relative;z-index:1;">
+        <button class="copyBtn" onclick="copyData()">Copy</button>
+        <button class="resetBtn" onclick="resetForm()">Reset</button>
+      </div>
+      <div class="word-limit-banner" id="wordLimitWarning" role="alert"></div>
+    </div>
+    <div id="bike-spec-panel" aria-hidden="true"></div>
+  </div><!-- end .crm-stage -->
+</div>
+
+<!-- ===== FOOTER ===== -->
+<footer class="re-footer">
+  <div class="re-footer-inner">
+    <div class="re-footer-made">Made by <strong>Advait</strong> · Hero MotoCorp CRM</div>
+    <div class="clock-box" id="re-clock-box">
+      <div>
+        <div class="clock-time">
+          <span class="clock-num" id="re-hh">--</span><span class="clock-sep">:</span>
+          <span class="clock-num" id="re-mm">--</span><span class="clock-sep">:</span>
+          <span class="clock-num" id="re-ss">--</span>
+          <span class="clock-ampm" id="re-ampm">--</span>
+        </div>
+        <div class="clock-date" id="re-date">-- --- ----</div>
+      </div>
+    </div>
+  </div>
+  <div class="re-footer-bar">© 2026 <span>Advait</span>. All Rights Reserved. &nbsp;·&nbsp; Hero MotoCorp CRM</div>
+</footer>
+
+<script>
+// ─── HERO BIKE DATA ─────────────────────────────────────────────────────────
+const bikeData = [
+{ name:"Hero Passion Plus", type:"Bike", category:"Entry Commuter (Up to 100cc)", price:"₹80,328 onwards", segment:"Entry Commuter", engine:"97.2cc", mileage:"60-70 kmpl",
+  keyUSP:["Sportier graphics/body panels than HF Deluxe","Same reliable 97.2cc motor","Positioned as a 'young commuter' option","Contemporary styling for slightly younger audience","Splendor/HF Deluxe reliability"],
+  whyCustomersBuy:"Buyers who want the Splendor/HF Deluxe reliability but with more contemporary styling for a slightly younger audience.",
+  features:["CBS","Tubeless Tyres","5-Year Warranty","Sportier Graphics"], tags:["Youth","Stylish","Reliable","Value"] },
+{ name:"Hero Glamour", type:"Bike", category:"125cc Commuter", price:"₹84,463 onwards", segment:"125cc Commuter", engine:"125cc", mileage:"55-60 kmpl",
+  keyUSP:["Funkier styling than base commuters","Digital console options","Positioned between HF/Splendor and fully-loaded Glamour X","More power and better looks than 100cc bikes","Affordable 125cc upgrade"],
+  whyCustomersBuy:"Buyers upgrading from a 100cc bike who want more power and better looks without paying for the Glamour X's cruise control/ride-mode extras.",
+  features:["Digital Console","Stylish Design","125cc Power","Better Ergonomics"], tags:["Upgrade","Style","Value","Commuter"] },
+{ name:"Hero Glamour X 125", type:"Bike", category:"125cc Commuter (Premium/Feature-rich)", price:"₹88,517 – ₹96,836", segment:"Premium 125cc Commuter", engine:"125cc", mileage:"55-60 kmpl",
+  keyUSP:["Segment-first cruise control","Ride-by-wire with 3 riding modes (Eco/Road/Power)","Full digital LCD console with Bluetooth & turn-by-turn navigation","LED lighting","USB charging","Flagship-commuter features at sub-₹1 lakh"],
+  whyCustomersBuy:"Tech-savvy commuters who want flagship-commuter features (cruise control, ride modes) at a sub-₹1 lakh price point.",
+  features:["Cruise Control","3 Riding Modes","Bluetooth Navigation","LED Lighting","USB Charging","Ride-by-Wire"], tags:["Tech","Premium","Feature-Packed","Navigation"] },
+{ name:"Hero Xtreme 125R", type:"Bike", category:"125cc Sports Commuter", price:"₹91,500 onwards", segment:"Sports Commuter", engine:"125cc", mileage:"50-55 kmpl",
+  keyUSP:["Aggressive street-fighter design language","Peppy 125cc motor tuned for performance","Sporty ergonomics","Sporty road presence","Performance over traditional commuter look"],
+  whyCustomersBuy:"Younger buyers who want sporty road presence and performance in the 125cc bracket rather than a traditional commuter look.",
+  features:["Street-Fighter Design","Performance Tuned","Sporty Ergonomics","Aggressive Styling"], tags:["Sporty","Performance","Youth","Aggressive"] },
+{ name:"Hero Xtreme 160R", type:"Bike", category:"160cc Naked/Sports", price:"₹1,13,846 onwards", segment:"160cc Naked", engine:"160cc", mileage:"45-50 kmpl",
+  keyUSP:["Muscular naked-bike styling","Single-channel ABS","Affordable step-up performance bike","Usable city + occasional-highway performance","First-time 'big bike' buyers"],
+  whyCustomersBuy:"First-time 'big bike' buyers moving up from 125cc who want naked-bike styling and usable city + occasional-highway performance.",
+  features:["Naked Styling","Single-Channel ABS","160cc Performance","Highway Capable"], tags:["Naked","Performance","Upgrade","ABS"] },
+{ name:"Hero Xtreme 160R 4V", type:"Bike", category:"160cc Naked/Sports (4-Valve)", price:"₹1,33,195 onwards", segment:"160cc 4-Valve", engine:"160cc 4-Valve", mileage:"45-50 kmpl",
+  keyUSP:["4-valve cylinder head for more top-end power/refinement","Sharper performance-oriented tune","More performance than base 160R","Without stepping up to 250cc segment"],
+  whyCustomersBuy:"Enthusiasts who want more performance than the base 160R without stepping up to the 250cc segment.",
+  features:["4-Valve Head","Higher Top-End Power","Refined Performance","Sharper Tune"], tags:["4-Valve","Performance","Enthusiast","Refined"] },
+{ name:"Hero XPulse 210", type:"Bike", category:"210cc Adventure/Off-Road (Premium)", price:"₹1,66,745 onwards", segment:"Premium Adventure", engine:"210cc Liquid-Cooled", mileage:"35-40 kmpl",
+  keyUSP:["TFT instrument cluster","Bigger/more powerful liquid-cooled platform engine","Rally-bike ergonomics","Dakar Edition for serious off-roaders","Flagship adventure tourer"],
+  whyCustomersBuy:"Serious adventure-touring and off-road enthusiasts who want more power/tech than the XPulse 200 4V.",
+  features:["TFT Display","Liquid-Cooled Engine","Rally Ergonomics","Dakar Edition","Switchable ABS"], tags:["Adventure","Off-Road","Premium","Touring"] },
+{ name:"Hero Karizma XMR", type:"Bike", category:"210cc Sports Tourer", price:"₹1,86,770 onwards", segment:"Sports Tourer", engine:"210cc Liquid-Cooled", mileage:"35-40 kmpl",
+  keyUSP:["Full fairing for touring comfort and wind protection","Liquid-cooled engine","Iconic Karizma badge/heritage appeal","Comfortable highway tourer","Legendary nameplate revival"],
+  whyCustomersBuy:"Buyers who grew up wanting a Karizma and want a comfortable, faired highway tourer rather than a naked streetfighter.",
+  features:["Full Fairing","Wind Protection","Liquid-Cooled","Heritage Badge","Touring Comfort"], tags:["Touring","Heritage","Faired","Comfort"] },
+{ name:"Hero Xtreme 250R", type:"Bike", category:"250cc Naked/Streetfighter", price:"₹1,72,524 onwards", segment:"250cc Streetfighter", engine:"250cc Liquid-Cooled DOHC", mileage:"30-35 kmpl",
+  keyUSP:["New-generation liquid-cooled DOHC engine","USD front forks","6-speed gearbox with slip/assist clutch","Road/Track switchable ABS","Aggressive streetfighter styling that looks like a 400cc bike","Big-bike looks, performance and touring capability"],
+  whyCustomersBuy:"Riders upgrading from 125–160cc bikes who want big-bike looks, performance and touring capability at a price well under rival 250cc bikes.",
+  features:["DOHC Engine","USD Forks","Slip/Assist Clutch","Switchable ABS","6-Speed Gearbox","400cc Looks"], tags:["Performance","Premium","Track","Big-Bike"] },
+{ name:"Hero Pleasure Plus", type:"Scooter", category:"110cc Scooter", price:"₹69,766 onwards", segment:"Entry Scooter", engine:"110cc", mileage:"55-60 kmpl",
+  keyUSP:["India's first scooter marketed with 'Why should boys have all the fun?'","Lightweight, easy-to-ride commuter scooter","Large underseat storage","Cheapest and most familiar scooter nameplate"],
+  whyCustomersBuy:"First-time riders, women commuters and families wanting Hero's cheapest and most familiar scooter nameplate.",
+  features:["Lightweight","Large Storage","Easy Ride","Women-Focused","Trusted Nameplate"], tags:["Women","Family","Entry","Storage"] },
+{ name:"Hero Destini 110", type:"Scooter", category:"110cc Scooter", price:"₹73,900 onwards", segment:"Family Scooter", engine:"110cc", mileage:"60-65 kmpl",
+  keyUSP:["Best-in-class mileage among Hero's 110cc scooters","Practical family-commuter focus","Family-friendly design/comfort","Lower 110cc price point"],
+  whyCustomersBuy:"Buyers who want the Destini's family-friendly design/comfort but at a lower 110cc price point.",
+  features:["Best Mileage","Family Design","Comfortable","Shared Platform"], tags:["Family","Mileage","Comfort","Value"] },
+{ name:"Hero Xoom 110", type:"Scooter", category:"110cc Sporty Scooter", price:"₹74,321 onwards", segment:"Sporty Scooter", engine:"110cc", mileage:"50-55 kmpl",
+  keyUSP:["Sportier handling and styling than Pleasure/Destini range","Peppy low-end acceleration","Good for weaving through traffic","Sporty-looking scooter without stepping up to bigger engines"],
+  whyCustomersBuy:"Younger riders who want a sporty-looking scooter without stepping up to the bigger-engined Xoom 125/160.",
+  features:["Sporty Handling","Peppy Acceleration","Traffic-Friendly","Youth Appeal"], tags:["Sporty","Youth","Agile","Traffic"] },
+{ name:"Hero Destini Prime", type:"Scooter", category:"125cc Scooter (Entry)", price:"₹74,710 onwards", segment:"Entry 125cc", engine:"125cc", mileage:"50-55 kmpl",
+  keyUSP:["Same 125cc platform as Destini 125","Simpler design/feature set for lowest price point","125cc performance headroom over 110cc","Most price-sensitive buyers"],
+  whyCustomersBuy:"Most price-sensitive scooter buyers who still want 125cc performance headroom over a 110cc scooter.",
+  features:["125cc Platform","Affordable","Performance Headroom","Simple Design"], tags:["Affordable","125cc","Value","Entry"] },
+{ name:"Hero Destini 125", type:"Scooter", category:"125cc Scooter (Feature-rich)", price:"₹79,388 onwards", segment:"Feature-Rich 125cc", engine:"125cc", mileage:"50-55 kmpl",
+  keyUSP:["Fully-digital console","Self-cancelling turn indicators","Sharper styling than Destini Prime","Hero's best-selling scooter model in FY25","Best mix of features, mileage and practicality"],
+  whyCustomersBuy:"Family buyers wanting the best mix of features, mileage and practicality in Hero's scooter range.",
+  features:["Digital Console","Self-Cancelling Indicators","Best-Seller FY25","Sharp Styling","Family Practicality"], tags:["Best-Seller","Features","Family","Digital"] },
+{ name:"Hero Xoom 125", type:"Scooter", category:"125cc Sporty Scooter", price:"₹83,394 onwards", segment:"Sporty 125cc", engine:"125cc", mileage:"45-50 kmpl",
+  keyUSP:["Bigger 125cc motor than Xoom 110","Sportier handling dynamics","Aimed at TVS NTorq/Suzuki Avenis buyers","More outright performance for daily commuting","New launch at Auto Expo 2025"],
+  whyCustomersBuy:"Riders who liked the Xoom 110's sporty character but want more outright performance for daily commuting.",
+  features:["125cc Performance","Sporty Dynamics","Auto Expo 2025","NTorq/Avenis Rival","Daily Commuter"], tags:["New Launch","Sporty","Performance","125cc"] },
+{ name:"Hero HF 100", type:"Bike", category:"Entry Commuter (Up to 100cc)", price:"₹59,839 onwards", segment:"Entry Level", engine:"100cc", mileage:"70-75 kmpl",
+  keyUSP:["Lowest price point in Hero's entire line-up","Simple air-cooled engine","Kick/self start options","Extremely low running cost","Bare-minimum ownership cost"],
+  whyCustomersBuy:"First-time bike buyers / rural & price-sensitive buyers who want bare-minimum ownership cost.",
+  features:["Lowest Price","Kick/Self Start","Low Running Cost","Simple Engine"], tags:["Cheapest","Rural","Economy","Entry"] },
+{ name:"Hero HF Deluxe", type:"Bike", category:"Entry Commuter (Up to 100cc)", price:"₹59,477 – ₹70,442", segment:"Benchmark Commuter", engine:"97.2cc", mileage:"65-75 kmpl",
+  keyUSP:["i3S idle stop-start for extra mileage","Integrated Braking System (CBS)","Tubeless tyres","5-year warranty","One of India's best-selling bikes overall","Unmatched service/spare-parts network"],
+  whyCustomersBuy:"Cost-conscious daily commuters and delivery riders wanting reliability, low maintenance and Hero's unmatched service network.",
+  features:["i3S Technology","CBS","Tubeless Tyres","5-Year Warranty","Best-Seller","Service Network"], tags:["Best-Seller","Reliability","Mileage","CBS"] },
+{ name:"Hero HF Deluxe Pro", type:"Bike", category:"Entry Commuter (Up to 100cc)", price:"₹72,620 onwards", segment:"Premium Entry", engine:"97.2cc", mileage:"65-75 kmpl",
+  keyUSP:["Same frugal 97.2cc engine as HF Deluxe","Fresher graphics","Slightly upgraded console","Marginally more premium look"],
+  whyCustomersBuy:"Buyers who want the HF Deluxe's low running cost but a marginally more premium look.",
+  features:["Premium Graphics","Upgraded Console","Same Engine","Better Look"], tags:["Premium Look","Graphics","Console","Value"] },
+{ name:"Hero HF Deluxe Flex Fuel", type:"Bike", category:"Entry Commuter (Up to 100cc) — Flex Fuel", price:"₹81,753 onwards", segment:"Flex Fuel", engine:"97.2cc Flex Fuel", mileage:"Varies by blend",
+  keyUSP:["Can run on E20 to E85 ethanol-petrol blends","Slightly more power/torque than regular HF Deluxe","Future-ready fuel flexibility","Rolling out first in Delhi & Maharashtra"],
+  whyCustomersBuy:"Early adopters wanting to hedge against fuel costs/availability as India expands ethanol-blended fuel.",
+  features:["E85 Compatible","Ethanol Blends","More Power","Future-Ready","Delhi/Maharashtra First"], tags:["Flex Fuel","Ethanol","Future","Innovation"] },
+{ name:"Hero XPulse 200 4V", type:"Bike", category:"200cc Adventure/Off-Road", price:"₹1,45,407 onwards", segment:"Adventure/Off-Road", engine:"200cc 4-Valve", mileage:"35-40 kmpl",
+  keyUSP:["Long-travel suspension","Off-road-biased tyres","220mm ground clearance","Switchable ABS for off-roading","Genuine off-road/dirt capability","Daily usability, well below premium ADV pricing"],
+  whyCustomersBuy:"Riders who want genuine off-road/dirt capability plus daily usability, well below premium ADV pricing.",
+  features:["Long-Travel Suspension","Off-Road Tyres","220mm Ground Clearance","Switchable ABS","Rally-Inspired"], tags:["Off-Road","Adventure","Rally","Capability"] },
+{ name:"Hero Xoom 160", type:"Scooter", category:"160cc Maxi-Scooter (Flagship)", price:"₹1,39,898 onwards", segment:"Flagship Maxi-Scooter", engine:"160cc Liquid-Cooled", mileage:"35-40 kmpl",
+  keyUSP:["Biggest, only liquid-cooled engine in Hero's scooter range","Maxi-scooter stance built for highway touring comfort","Highway cruising capability","Premium, big-bodied scooter experience"],
+  whyCustomersBuy:"Scooter buyers who want highway cruising capability and a premium, big-bodied scooter experience.",
+  features:["Liquid-Cooled","Maxi-Scooter Stance","Highway Touring","Flagship","Premium Comfort"], tags:["Maxi-Scooter","Flagship","Highway","Liquid-Cooled"] },
+{ name:"Hero Splendor Plus", type:"Bike", category:"Entry Commuter — World's Highest-Selling Motorcycle", price:"₹77,557 – ₹80,331", segment:"World's Best-Seller", engine:"97.2cc", mileage:"60-70 kmpl",
+  keyUSP:["Unmatched mileage (60-70 kmpl real world)","Extremely low maintenance","5-year warranty","Hero's biggest service/spare-parts network","World's highest-selling motorcycle"],
+  whyCustomersBuy:"Rural and price-sensitive daily commuters who want India's most trusted, lowest-running-cost motorcycle.",
+  features:["World's Best-Seller","Unmatched Mileage","Low Maintenance","5-Year Warranty","Biggest Network"], tags:["Best-Seller","Mileage","Trusted","Network"] },
+{ name:"Hero Splendor Plus XTEC", type:"Bike", category:"Entry Commuter — Connected", price:"₹81,283 – ₹84,326", segment:"Connected Commuter", engine:"97.2cc", mileage:"60-70 kmpl",
+  keyUSP:["Bluetooth-connected digital console (call/SMS alerts)","Real-time mileage tracking","LED DRL","More premium graphics on trusted Splendor platform","Connected features without leaving Splendor name"],
+  whyCustomersBuy:"Splendor loyalists who want modern connected features without leaving the trusted Splendor name.",
+  features:["Bluetooth Console","Call/SMS Alerts","Real-Time Mileage","LED DRL","Premium Graphics"], tags:["Connected","Bluetooth","Smart","Premium"] },
+{ name:"Hero Splendor Plus Flex Fuel", type:"Bike", category:"Entry Commuter — Flex Fuel", price:"₹82,710 onwards", segment:"Flex Fuel Commuter", engine:"97.2cc Flex Fuel", mileage:"Varies by blend",
+  keyUSP:["Future-ready fuel flexibility on India's most trusted motorcycle","Rolling out first in Delhi & Maharashtra","Ethanol-blending expansion ready","Hedge fuel costs"],
+  whyCustomersBuy:"Early adopters and environmentally-conscious buyers wanting to hedge fuel costs as ethanol-blending expands.",
+  features:["E5-E85 Compatible","Future-Ready","Delhi/Maharashtra First","Trusted Platform","Eco-Conscious"], tags:["Flex Fuel","Ethanol","Eco","Future"] },
+{ name:"Hero Super Splendor XTEC", type:"Bike", category:"125cc Commuter — Premium Splendor", price:"₹84,448 – ₹90,000", segment:"Premium 125cc Splendor", engine:"125cc", mileage:"Up to 75 kmpl claimed",
+  keyUSP:["More power and torque than 100cc Splendor Plus","Bluetooth connectivity","Silent start-stop tech","Up to 75 kmpl claimed mileage","125cc performance with Splendor badge"],
+  whyCustomersBuy:"Splendor buyers who want more engine performance (125cc) without leaving the trusted Splendor badge.",
+  features:["125cc Power","Bluetooth","Silent Start-Stop","High Mileage","Splendor Badge"], tags:["125cc","Premium","Connected","Mileage"] },
+{ name:"Hero Mavrick 440", type:"Bike", category:"440cc Roadster (Premium Flagship)", price:"₹2,13,207 – ₹2,39,924", segment:"Flagship 440cc", engine:"440cc", mileage:"~32 kmpl (ARAI)",
+  keyUSP:["Most affordable 440cc motorcycle in India","Undercuts Royal Enfield Classic 350, Triumph Speed 400 and Harley-Davidson X440","Developed with Harley-Davidson know-how","Genuine big-bike (440cc) ownership","Touring comfort at price well below premium rivals"],
+  whyCustomersBuy:"Buyers wanting genuine big-bike (440cc) ownership and touring comfort at a price well below premium retro-roadster rivals.",
+  features:["440cc Engine","Harley-Davidson Tech","Most Affordable 440cc","Touring Comfort","Big-Bike Ownership","Undercuts Rivals"], tags:["Flagship","440cc","Harley-Davidson","Premium","Touring"] }
+];
+const bikeByName = {};
+bikeData.forEach(b => bikeByName[b.name] = b);
+
+// ─── SPEC CARD BUILDER ───────────────────────────────────────────────────
+function buildSpecCardHTML(name){
+  const b = bikeByName[name];
+  if(!b) return '<div class="bsc"><div class="bsc-empty">No details available for this model.</div></div>';
+  const uspHTML = (b.keyUSP||[]).map(u=>`<li>${u}</li>`).join('');
+  const featHTML = (b.features||[]).map(f=>`<div class="bsc-row"><span class="bsc-val" style="text-align:left;font-weight:600;">• ${f}</span></div>`).join('');
+  const tagsHTML = (b.tags||[]).map(t=>`<span class="bsc-tag">${t}</span>`).join('');
+  return `
+    <div class="bsc">
+      <div class="bsc-top"><div class="bsc-name">${b.name}</div><div class="bsc-badge">${b.type}</div></div>
+      <div class="bsc-category">${b.category}</div>
+      <div class="bsc-price">${b.price}</div>
+      <div class="bsc-block-lbl">Tags</div>
+      <div class="bsc-tags">${tagsHTML}</div>
+      <div class="bsc-block-lbl">Key Specs</div>
+      <div class="bsc-specs">
+        <div class="bsc-row"><span class="bsc-lbl">Engine</span><span class="bsc-val">${b.engine||'—'}</span></div>
+        <div class="bsc-row"><span class="bsc-lbl">Mileage</span><span class="bsc-val">${b.mileage||'—'}</span></div>
+        <div class="bsc-row"><span class="bsc-lbl">Segment</span><span class="bsc-val">${b.segment||'—'}</span></div>
+      </div>
+      <div class="bsc-block-lbl">Key USPs</div>
+      <ul class="bsc-usp">${uspHTML}</ul>
+      <div class="bsc-block-lbl">Features</div>
+      <div class="bsc-specs">${featHTML}</div>
+      ${b.whyCustomersBuy ? `<div class="bsc-why">ⓘ ${b.whyCustomersBuy}</div>` : ''}
+      <div class="bsc-foot">Info curated for sales reference · verify latest price at dealership</div>
+    </div>`;
+}
+
+// ─── SPEC PANEL SHOW/HIDE ───────────────────────────────────────────────
+let _specHideT, _pinnedSpecHTML=null, _hoverActive=false, _wideT;
+function _applyWide(){ clearTimeout(_wideT); _wideT=setTimeout(()=>{ const st=document.querySelector('.crm-stage'); if(st) st.classList.toggle('stage-wide', _hoverActive || !!_pinnedSpecHTML); }, 0); }
+function showSpecPanel(html){ clearTimeout(_specHideT); const p=document.getElementById('bike-spec-panel'); if(!p)return; p.innerHTML=html; p.classList.add('bsp-open'); p.setAttribute('aria-hidden','false'); }
+function hoverSpecCard(html){ _hoverActive=true; _applyWide(); showSpecPanel(html); }
+function pinSpecPanel(html){ _pinnedSpecHTML=html; _applyWide(); showSpecPanel(html); }
+function unpinSpecPanel(){ _pinnedSpecHTML=null; _hoverActive=false; _applyWide(); clearTimeout(_specHideT); const p=document.getElementById('bike-spec-panel'); if(!p)return; p.classList.remove('bsp-open'); p.setAttribute('aria-hidden','true'); }
+function hideSpecPanel(){ _hoverActive=false; clearTimeout(_specHideT); if(_pinnedSpecHTML){ showSpecPanel(_pinnedSpecHTML); _applyWide(); return; } _applyWide(); _specHideT=setTimeout(()=>{ const p=document.getElementById('bike-spec-panel'); if(!p)return; p.classList.remove('bsp-open'); p.setAttribute('aria-hidden','true'); }, 120); }
+function attachModelHover(dropId){
+  const drop=document.getElementById(dropId); if(!drop)return;
+  const w=drop.closest('.csw'); if(w) w._hasCard=true;
+  drop.querySelectorAll('.di').forEach(item=>{
+    const name=item.dataset.val || item.textContent;
+    item.addEventListener('mouseenter',()=>hoverSpecCard(buildSpecCardHTML(name)));
+  });
+}
+
+// ─── CUSTOM DROPDOWN ─────────────────────────────────────────────────────
+function buildCustomDrop(wrapperId, triggerId, dropId, items, onSelect, placeholder) {
+  const wrapper = document.getElementById(wrapperId);
+  const trigger = document.getElementById(triggerId);
+  const drop = document.getElementById(dropId);
+  const els = []; let kbIdx = -1;
+  drop.innerHTML = '';
+  items.forEach(({ label, value, sub }) => {
+    const item = document.createElement('div');
+    item.className = 'di'; item.dataset.val = value;
+    item.innerHTML = `<span>${label}</span>${sub?`<span class="di-type">${sub}</span>`:''}`;
+    item.addEventListener('click', () => pick(label, value));
+    drop.appendChild(item); els.push(item);
+  });
+  function clearKb() { els.forEach(i => i.classList.remove('kb-focus')); kbIdx = -1; }
+  function setKb(idx) { els.forEach(i => i.classList.remove('kb-focus')); kbIdx = Math.max(0, Math.min(idx, els.length - 1)); els[kbIdx].classList.add('kb-focus'); els[kbIdx].scrollIntoView({ block:'nearest' }); }
+  function open() {
+    closeAllDropdowns(); wrapper.classList.add('open');
+    requestAnimationFrame(() => {
+      const r = wrapper.getBoundingClientRect(), dh = Math.min(drop.scrollHeight, 340);
+      drop.classList.toggle('drop-up', window.innerHeight - r.bottom < dh + 8 && r.top > window.innerHeight - r.bottom);
+    });
+    setKb(0);
+  }
+  function close() { wrapper.classList.remove('open'); drop.classList.remove('drop-up'); clearKb(); if(wrapper._hasCard) hideSpecPanel(); }
+  function pick(label, value) {
+    trigger.textContent = label; trigger.classList.add('has-value');
+    close(); onSelect(value); setTimeout(() => advanceToNext(trigger), 0);
+    if (typeof checkWordLimit === 'function') checkWordLimit();
+  }
+  if (!wrapper._listenersAttached) {
+    wrapper._listenersAttached = true;
+    trigger.addEventListener('click', e => { e.stopPropagation(); wrapper.classList.contains('open') ? close() : open(); });
+    trigger.addEventListener('keydown', e => {
+      const isOpen = wrapper.classList.contains('open');
+      if (e.key==='Enter'||e.key===' ') { e.preventDefault(); if(!isOpen) open(); else if(kbIdx>=0) pick(els[kbIdx].textContent,els[kbIdx].dataset.val); else close(); }
+      else if (e.key==='ArrowDown') { e.preventDefault(); isOpen ? setKb(kbIdx+1) : open(); }
+      else if (e.key==='ArrowUp')   { e.preventDefault(); isOpen ? setKb(kbIdx-1) : open(); }
+      else if (e.key==='Escape')    { close(); }
+    });
+  }
+  wrapper._open  = open;
+  wrapper._close = close;
+  wrapper._reset = () => { trigger.textContent = placeholder||'Select'; trigger.classList.remove('has-value'); close(); };
+}
+
+function buildModelItems(){
+  return bikeData.map(b => ({ label:b.name, value:b.name, sub:b.type }));
+}
+function buildModelDropdown() {
+  buildCustomDrop('wrap_model','trig_model','drop_model', buildModelItems(), name => {
+    document.getElementById('model').value = name;
+    pinSpecPanel(buildSpecCardHTML(name));
+  }, 'Select Model');
+  attachModelHover('drop_model');
+}
+function buildSectionModelDrop(section, placeholder) {
+  buildCustomDrop(`wrap_${section}_model`,`trig_${section}_model`,`drop_${section}_model`, buildModelItems(), name => {
+    document.getElementById(`${section}_model`).value = name;
+    pinSpecPanel(buildSpecCardHTML(name));
+  }, placeholder || 'Select Model');
+  attachModelHover('drop_' + section + '_model');
+}
+
+function closeAllDropdowns() {
+  document.querySelectorAll('.csw.open').forEach(w => { w.classList.remove('open'); const d=w.querySelector('.cdrop'); if(d) d.classList.remove('drop-up'); });
+  if (typeof hideSpecPanel === 'function') hideSpecPanel();
+}
+document.addEventListener('click', closeAllDropdowns);
+
+function advanceToNext(el) {
+  const section = el.closest('[id$="Section"]') || el.closest('.box');
+  if (!section) return;
+  const fields = Array.from(section.querySelectorAll('input:not([type=hidden]), .cst'));
+  const idx = fields.indexOf(el);
+  if (idx > -1 && idx < fields.length - 1) fields[idx + 1].focus();
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  buildModelDropdown(); buildSectionModelDrop('b2','Select Booking Model'); buildSectionModelDrop('r2','Select Model');
+  document.addEventListener('keydown', e => {
+    if (e.key !== 'Enter') return;
+    const active = document.activeElement;
+    if (active.classList.contains('cst')) return;
+    if (active.tagName==='INPUT' && active.type!=='hidden') { e.preventDefault(); advanceToNext(active); }
+  });
+});
+
+// ─── MODE SWITCHER ───────────────────────────────────────────────────────
+let currentMode = 'l1';
+function setMode(m) {
+  currentMode = m;
+  document.getElementById('l1Section').classList.toggle('hide', m !== 'l1');
+  document.getElementById('l2BookedSection').classList.toggle('hide', m !== 'l2booked');
+  document.getElementById('l2RetailSection').classList.toggle('hide', m !== 'l2retail');
+  closeAllDropdowns();
+  checkWordLimit();
+}
+
+// ─── WORD LIMIT (kept structurally, disabled) ────────────────────────────
+function isOverWordLimit(str) { return false; }
+function setWordLimitWarning(visible) { const el = document.getElementById('wordLimitWarning'); if (el) el.classList.toggle('show', !!visible); }
+function checkWordLimit() { const over = isOverWordLimit(buildText(currentMode)); setWordLimitWarning(over); return over; }
+
+// ─── BUILD TEXT (Copy) ───────────────────────────────────────────────────
+function buildText(mode) {
+  if (mode === 'l1') {
+    return [
+      model.value          && `Model / ${model.value}`,
+      buyingTime.value     && `, Buying time / ${buyingTime.value}`,
+      dealerNameLoc.value  && `, Dealer Name / Location / ${dealerNameLoc.value}`,
+      l1_bookingName.value && `, Booking Name / ${l1_bookingName.value}`,
+      altNumber.value      && `, Alternate Number / ${altNumber.value}`,
+      testRide.value       && `, Test ride suggestion / ${testRide.value}`,
+      keyEnquiry.value     && `, Key Enquiry / ${keyEnquiry.value}`
+    ].filter(Boolean).join('');
+  }
+  if (mode === 'l2booked') {
+    return [
+      b2_model.value                 && `Booking Model / ${b2_model.value}`,
+      b2_dealershipName.value        && `, Dealership Name / ${b2_dealershipName.value}`,
+      b2_bookingDate.value           && `, Booking Date / ${b2_bookingDate.value}`,
+      b2_bookingName.value           && `, Booking Name / ${b2_bookingName.value}`,
+      b2_bookingMobile.value         && `, Booking Mobile Number / ${b2_bookingMobile.value}`,
+      b2_expectedPurchaseDate.value  && `, Expected Purchased Date / ${b2_expectedPurchaseDate.value}`
+    ].filter(Boolean).join('');
+  }
+  if (mode === 'l2retail') {
+    return [
+      r2_model.value            && `Model / ${r2_model.value}`,
+      r2_dateOfPurchase.value   && `, Date of Purchase / ${r2_dateOfPurchase.value}`,
+      r2_dealershipName.value   && `, Dealership Name / ${r2_dealershipName.value}`,
+      r2_dealerLocation.value   && `, Dealer Location / ${r2_dealerLocation.value}`,
+      r2_bookingName.value      && `, Booking Name / ${r2_bookingName.value}`,
+      r2_bookingMobile.value    && `, Booking Mobile Number / ${r2_bookingMobile.value}`,
+      r2_regChassisInvoice.value&& `, Reg. No./Chassis/Invoice No./Order ID / ${r2_regChassisInvoice.value}`
+    ].filter(Boolean).join('');
+  }
+  return '';
+}
+
+// ─── COPY ────────────────────────────────────────────────────────────────
+function copyData() {
+  const text = buildText(currentMode);
+  if (isOverWordLimit(text)) { setWordLimitWarning(true); return; }
+  copyToClipboard(text);
+  showToast('Copied ✅');
+}
+function copyToClipboard(text){
+  try{ if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(text).catch(()=>fallbackCopy(text)); } else { fallbackCopy(text); } }catch(e){ fallbackCopy(text); }
+}
+function fallbackCopy(text){
+  try{ const ta=document.createElement('textarea'); ta.value=text; ta.setAttribute('readonly',''); ta.style.position='fixed'; ta.style.top='-1000px'; ta.style.opacity='0'; document.body.appendChild(ta); ta.focus(); ta.select(); try{ta.setSelectionRange(0, text.length);}catch(e){} document.execCommand('copy'); document.body.removeChild(ta); }catch(e){}
+}
+function showToast(msg){
+  let t=document.getElementById('_reToast'); if(!t){ t=document.createElement('div'); t.id='_reToast'; document.body.appendChild(t); }
+  t.textContent=msg; t.classList.add('show'); clearTimeout(t._h); t._h=setTimeout(()=>t.classList.remove('show'), 1600);
+}
+function showConfirm(title, msg, onYes){
+  const old=document.getElementById('_reConfirm'); if(old) old.remove();
+  const ov=document.createElement('div'); ov.id='_reConfirm'; ov.className='re-confirm-ov';
+  ov.innerHTML='<div class="re-confirm-box"><div class="re-confirm-title"></div><div class="re-confirm-msg"></div><div class="re-confirm-actions"><button class="re-confirm-cancel">Cancel</button><button class="re-confirm-ok">Reset</button></div></div>';
+  ov.querySelector('.re-confirm-title').textContent=title;
+  ov.querySelector('.re-confirm-msg').textContent=msg;
+  document.body.appendChild(ov); requestAnimationFrame(()=>ov.classList.add('show'));
+  const closeOv=()=>{ ov.classList.remove('show'); setTimeout(()=>ov.remove(),200); };
+  ov.querySelector('.re-confirm-cancel').addEventListener('click', e=>{ e.stopPropagation(); closeOv(); });
+  ov.querySelector('.re-confirm-ok').addEventListener('click', e=>{ e.stopPropagation(); closeOv(); if(onYes) onYes(); });
+  ov.addEventListener('click', e=>{ if(e.target===ov) closeOv(); });
+}
+
+// ─── RESET ───────────────────────────────────────────────────────────────
+function resetForm() { showConfirm('Reset everything?', 'All entered data will be cleared.', doResetForm); }
+function doResetForm() {
+  document.querySelectorAll('input').forEach(el => { if (!el.hasAttribute('readonly')) el.value = ''; });
+  [['trig_model','Select Model'],
+   ['trig_b2_model','Select Booking Model'],['trig_r2_model','Select Model']].forEach(([id,ph]) => {
+    const el = document.getElementById(id); if(!el) return;
+    el.textContent = ph; el.classList.remove('has-value');
+  });
+  if(typeof unpinSpecPanel==='function') unpinSpecPanel();
+  closeAllDropdowns();
+  setWordLimitWarning(false);
+  setMode('l1');
+}
+
+// ─── DARK / LIGHT THEME TOGGLE ───────────────────────────────────────────
+(function(){
+  const STORAGE_KEY = 'hero-crm-theme';
+  let isDark = localStorage.getItem(STORAGE_KEY) === 'dark';
+  function apply(dark, animate) {
+    document.body.classList.toggle('dark-mode', dark);
+    const hTitle = document.getElementById('hbgThemeTitle');
+    if (hTitle) hTitle.textContent = dark ? '🌙 Night Mode' : '☀️ Day Mode';
+    if (animate) {
+      const flash = document.createElement('div');
+      flash.style.cssText = 'position:fixed;inset:0;background:' + (dark ? '#000' : '#fff') + ';opacity:0;pointer-events:none;z-index:299999;transition:opacity .18s ease';
+      document.body.appendChild(flash);
+      requestAnimationFrame(() => { flash.style.opacity = '0.15'; setTimeout(() => { flash.style.opacity = '0'; setTimeout(() => flash.remove(), 200); }, 180); });
+    }
+    localStorage.setItem(STORAGE_KEY, dark ? 'dark' : 'light');
+  }
+  const hSlider = document.getElementById('hbgThemeSlider');
+  if (hSlider) {
+    hSlider.addEventListener('click', () => { isDark = !isDark; apply(isDark, true); });
+    hSlider.addEventListener('keydown', e => { if (e.key===' '||e.key==='Enter'){e.preventDefault();isDark=!isDark;apply(isDark,true);} });
+  }
+  apply(isDark, false);
+})();
+
+// ─── CLOCK ───────────────────────────────────────────────────────────────
+(function(){
+  const MS=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  function pad(n){ return String(n).padStart(2,'0'); }
+  function tick(){
+    const n=new Date(); let h=n.getHours(); const ampm=h>=12?'PM':'AM'; h=h%12||12;
+    document.getElementById('re-hh').textContent=pad(h);
+    document.getElementById('re-mm').textContent=pad(n.getMinutes());
+    document.getElementById('re-ss').textContent=pad(n.getSeconds());
+    document.getElementById('re-ampm').textContent=ampm;
+    document.getElementById('re-date').textContent=n.getDate()+' '+MS[n.getMonth()]+' '+n.getFullYear();
+  }
+  tick(); setInterval(tick,1000);
+})();
+
+// ─── HAMBURGER ───────────────────────────────────────────────────────────
+(function(){
+  const btn=document.getElementById('hbgBtn'),panel=document.getElementById('hbgPanel'),overlay=document.getElementById('hbgOverlay'),closeBtn=document.getElementById('hbgClose');
+  function openMenu(){ btn.classList.add('is-open'); panel.classList.add('is-open'); overlay.classList.add('is-open'); btn.setAttribute('aria-expanded','true'); panel.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden'; }
+  function closeMenu(){ btn.classList.remove('is-open'); panel.classList.remove('is-open'); overlay.classList.remove('is-open'); btn.setAttribute('aria-expanded','false'); panel.setAttribute('aria-hidden','true'); document.body.style.overflow=''; }
+  btn.addEventListener('click',e=>{e.stopPropagation();btn.classList.contains('is-open')?closeMenu():openMenu();});
+  overlay.addEventListener('click',closeMenu);
+  closeBtn.addEventListener('click',e=>{e.stopPropagation();closeMenu();});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&btn.classList.contains('is-open'))closeMenu();});
+  panel.addEventListener('click',e=>e.stopPropagation());
+})();
+</script>
+</body>
+</html>
