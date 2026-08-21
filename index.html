@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<script>window.APP_VERSION = "1.0.0";</script>
+<script>window.APP_VERSION = "1.0.1";</script>
 
 <style>
 :root{
@@ -18,27 +18,27 @@
   --hero-silver:#C0C0C0; --hero-white:#FFFFFF; --hero-offwhite:#F5F5F5;
 }
 *{position:relative;box-sizing:border-box;}
+html{scroll-behavior:smooth;font-size:16px;}
 body{margin:0;padding:0;font-family:'Inter',system-ui,sans-serif;background:var(--hero-offwhite);}
-html{scroll-behavior:smooth;}
 
 /* ── GLOBAL HEADER ── */
 #global-header{
-  position:fixed;top:0;left:0;right:0;height:58px;z-index:150000;
+  position:fixed;top:0;left:0;right:0;height:56px;z-index:150000;
   background:rgba(255,255,255,0.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
   border-bottom:1px solid rgba(227,24,55,0.18);
   box-shadow:0 2px 24px rgba(0,0,0,0.08);
   display:flex;align-items:center;padding:0 18px;gap:14px;
 }
 .gh-logo{display:flex;align-items:center;gap:10px;cursor:default;user-select:none;}
-.gh-logo-mark{width:34px;height:34px;border-radius:9px;background:linear-gradient(135deg,var(--hero-red),var(--hero-darkred));display:flex;align-items:center;justify-content:center;color:#fff;font-family:'Space Grotesk',sans-serif;font-weight:800;font-size:16px;box-shadow:0 4px 14px rgba(227,24,55,0.35);}
+.gh-logo-mark{width:32px;height:32px;border-radius:9px;background:linear-gradient(135deg,var(--hero-red),var(--hero-darkred));display:flex;align-items:center;justify-content:center;color:#fff;font-family:'Space Grotesk',sans-serif;font-weight:800;font-size:15px;box-shadow:0 4px 14px rgba(227,24,55,0.35);}
 .gh-logo-text{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:16px;color:var(--hero-black);letter-spacing:0.2px;}
 .gh-logo-text span{color:var(--hero-red);}
 .gh-sub{font-size:10px;color:rgba(20,16,12,0.35);letter-spacing:1.5px;text-transform:uppercase;margin-left:2px;display:none;}
 @media(min-width:560px){.gh-sub{display:block;}}
 .gh-right{display:flex;align-items:center;gap:10px;margin-left:auto;flex-shrink:0;}
-.hbg-btn{width:40px;height:40px;border-radius:10px;background:rgba(20,16,12,0.04);border:1px solid rgba(20,16,12,0.09);cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:0;transition:background .18s,border-color .18s,transform .14s;}
+.hbg-btn{width:38px;height:38px;border-radius:10px;background:rgba(20,16,12,0.04);border:1px solid rgba(20,16,12,0.09);cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:0;transition:background .18s,border-color .18s,transform .14s;}
 .hbg-btn:hover{background:rgba(227,24,55,0.09);border-color:rgba(227,24,55,0.3);transform:scale(1.05);}
-.hbg-bar{display:block;width:20px;height:2px;background:#3a352c;border-radius:2px;transition:transform .3s cubic-bezier(.77,0,.18,1),opacity .2s ease,width .25s ease;}
+.hbg-bar{display:block;width:18px;height:2px;background:#3a352c;border-radius:2px;transition:transform .3s cubic-bezier(.77,0,.18,1),opacity .2s ease,width .25s ease;}
 .hbg-btn.is-open .hbg-bar:nth-child(1){transform:translateY(6px) rotate(45deg);}
 .hbg-btn.is-open .hbg-bar:nth-child(2){opacity:0;width:0;}
 .hbg-btn.is-open .hbg-bar:nth-child(3){transform:translateY(-6px) rotate(-45deg);}
@@ -96,52 +96,53 @@ body.dark-mode ::-webkit-scrollbar-thumb{background:#444!important;}
 
 /* ── HERO / CRM SECTION ── */
 .hero-section{
-  min-height:100vh;padding:clamp(10px,2vw,20px);
-  padding-top:calc(58px + clamp(10px,2vw,20px));
+  min-height:100vh;padding:16px;
+  padding-top:calc(56px + 16px);
   background-color:#faf7f0;
   background-image:radial-gradient(ellipse 60% 45% at 14% 12%,rgba(227,24,55,0.06) 0%,transparent 65%),
     radial-gradient(ellipse 55% 45% at 88% 88%,rgba(212,168,67,0.08) 0%,transparent 65%);
   display:flex;flex-direction:column;justify-content:center;transition:background-color .4s ease;overflow:hidden;
 }
 .hero-section::after{
-  content:'HERO MOTOCORP · FILL IT · SHUT IT · FORGET IT';position:absolute;left:50%;bottom:18px;
+  content:'HERO MOTOCORP · FILL IT · SHUT IT · FORGET IT';position:absolute;left:50%;bottom:10px;
   transform:translateX(-50%);font-size:10px;font-weight:700;letter-spacing:4px;
   color:rgba(154,20,40,0.28);text-transform:uppercase;pointer-events:none;user-select:none;white-space:nowrap;z-index:1;
 }
 @media(max-width:600px){.hero-section::after{font-size:8px;letter-spacing:2px;}}
 
-.crm-stage{display:flex;align-items:stretch;justify-content:center;width:100%;margin:auto;box-sizing:border-box;z-index:2;}
+.crm-stage{display:flex;align-items:stretch;justify-content:center;width:100%;max-width:1400px;margin:auto;box-sizing:border-box;z-index:2;gap:0;}
 .crm-stage .box{margin:0;flex:0 0 auto;}
 
 .box{
-  width:min(92vw,600px);margin:auto;padding:clamp(22px,3vw,38px);
-  background:rgba(255,255,255,0.55);backdrop-filter:blur(24px) saturate(1.3);-webkit-backdrop-filter:blur(24px) saturate(1.3);
-  border-radius:15px;border:1px solid rgba(255,255,255,0.6);box-shadow:0 10px 40px rgba(20,15,10,0.12);
+  width:min(96vw,760px);margin:auto;padding:28px 40px;
+  background:rgba(255,255,255,0.6);backdrop-filter:blur(24px) saturate(1.3);-webkit-backdrop-filter:blur(24px) saturate(1.3);
+  border-radius:16px;border:1px solid rgba(255,255,255,0.6);box-shadow:0 10px 40px rgba(20,15,10,0.12);
   transition:width .2s ease,padding .2s ease;overflow:hidden;z-index:2;
 }
 .box::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--hero-red) 0%,var(--hero-gold) 100%);}
-h2{text-align:center;color:var(--hero-darkred);margin-bottom:24px;font-size:clamp(22px,2vw,30px);font-family:'Space Grotesk',sans-serif;font-weight:700;}
-input,select{width:100%;padding:14px 12px;margin:11px 0;border-radius:10px;border:none;background:rgba(0,0,0,0.045);color:#1a1714;transition:all .2s ease;height:clamp(48px,5vw,54px);font-size:clamp(13px,1vw,15px);box-sizing:border-box;}
+h2{text-align:center;color:var(--hero-darkred);margin:0 0 20px;font-size:26px;font-family:'Space Grotesk',sans-serif;font-weight:700;}
+
+input,select{width:100%;padding:12px 14px;margin:8px 0;border-radius:10px;border:none;background:rgba(0,0,0,0.045);color:#1a1714;transition:all .2s ease;height:48px;font-size:16px;box-sizing:border-box;}
 input::placeholder{color:#8a8174;}
-input:focus,select:focus{outline:none;box-shadow:0 0 10px rgba(212,168,67,0.4),0 0 5px rgba(227,24,55,0.25) inset;transform:scale(1.02);}
-button{padding:12px;margin:7px 0;cursor:pointer;border:none;border-radius:10px;height:44px;font-size:clamp(12px,1vw,14px);font-weight:600;}
-.topBtn{width:32%;background:#eee6d6;color:#1a1714;font-size:clamp(10px,1vw,13px);white-space:nowrap;z-index:1;}
-.copyBtn{width:49%;background:#3cb878;color:#fff;z-index:1;}
-.resetBtn{width:49%;background:#e0563c;color:#fff;z-index:1;}
+input:focus,select:focus{outline:none;box-shadow:0 0 10px rgba(212,168,67,0.4),0 0 5px rgba(227,24,55,0.25) inset;transform:scale(1.01);}
+button{padding:12px;margin:7px 0;cursor:pointer;border:none;border-radius:10px;height:44px;font-size:14px;font-weight:600;}
+.topBtn{width:24%;background:#eee6d6;color:#1a1714;font-size:12px;padding:10px 4px;white-space:nowrap;z-index:1;}
+.copyBtn{width:49%;background:#3cb878;color:#fff;z-index:1;font-size:15px;}
+.resetBtn{width:49%;background:#e0563c;color:#fff;z-index:1;font-size:15px;}
 .hide{display:none;}
 
-.word-limit-banner{display:none;margin-top:10px;padding:10px 14px;border-radius:8px;background:rgba(255,127,127,0.12);border:1px solid rgba(255,127,127,0.45);color:#c0392b;font-size:12.5px;font-weight:600;text-align:center;}
+.word-limit-banner{display:none;margin-top:10px;padding:10px 14px;border-radius:8px;background:rgba(255,127,127,0.12);border:1px solid rgba(255,127,127,0.45);color:#c0392b;font-size:13px;font-weight:600;text-align:center;}
 .word-limit-banner.show{display:block;}
 
 /* ── CUSTOM DROPDOWN ── */
-.csw{margin:11px 0;z-index:1;}
+.csw{margin:8px 0;z-index:1;}
 .csw.open{z-index:10000;}
-.cst{width:100%;height:clamp(48px,5vw,54px);padding:0 36px 0 12px;background:rgba(0,0,0,0.045);border-radius:10px;color:#8a8174;font-size:15px;cursor:pointer;display:flex;align-items:center;box-sizing:border-box;transition:box-shadow .2s,transform .2s;user-select:none;}
+.cst{width:100%;height:48px;padding:0 36px 0 14px;background:rgba(0,0,0,0.045);border-radius:10px;color:#8a8174;font-size:15px;cursor:pointer;display:flex;align-items:center;box-sizing:border-box;transition:box-shadow .2s,transform .2s;user-select:none;}
 .cst.has-value{color:#1a1714;}
-.cst::after{content:'';position:absolute;right:10px;top:50%;transform:translateY(-50%);width:16px;height:16px;background-image:url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%233a352c' stroke-width='2'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");background-repeat:no-repeat;background-size:16px;transition:transform .2s;}
+.cst::after{content:'';position:absolute;right:12px;top:50%;transform:translateY(-50%);width:16px;height:16px;background-image:url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%233a352c' stroke-width='2'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");background-repeat:no-repeat;background-size:16px;transition:transform .2s;}
 .csw.open .cst::after{transform:translateY(-50%) rotate(180deg);}
 .csw.open .cst,.cst:focus{outline:none;box-shadow:0 0 10px rgba(212,168,67,0.4),0 0 5px rgba(227,24,55,0.25) inset;}
-.cdrop{display:none;position:absolute;top:calc(100% + 4px);left:0;width:100%;background:#ffffff;border:1px solid rgba(20,16,12,0.13);border-radius:10px;max-height:340px;overflow-y:auto;z-index:99999;box-shadow:0 6px 22px rgba(0,0,0,0.12);scrollbar-width:thin;scrollbar-color:#cfc6b3 transparent;padding-bottom:2px;}
+.cdrop{display:none;position:absolute;top:calc(100% + 4px);left:0;width:100%;background:#ffffff;border:1px solid rgba(20,16,12,0.13);border-radius:10px;max-height:320px;overflow-y:auto;z-index:99999;box-shadow:0 6px 22px rgba(0,0,0,0.12);scrollbar-width:thin;scrollbar-color:#cfc6b3 transparent;padding-bottom:2px;}
 .cdrop.drop-up{top:auto;bottom:calc(100% + 4px);}
 .cdrop::-webkit-scrollbar{width:5px;}
 .cdrop::-webkit-scrollbar-thumb{background:#cfc6b3;border-radius:4px;}
@@ -149,25 +150,25 @@ button{padding:12px;margin:7px 0;cursor:pointer;border:none;border-radius:10px;h
 .csw.open .cdrop.drop-up{animation:fadeUp .15s ease;}
 @keyframes fadeDown{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
 @keyframes fadeUp{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
-.di{padding:10px 14px;cursor:pointer;color:#3a352c;font-size:13.5px;font-weight:500;display:flex;align-items:center;justify-content:space-between;gap:8px;border-bottom:1px solid rgba(20,16,12,0.05);transition:background .12s;}
+.di{padding:11px 14px;cursor:pointer;color:#3a352c;font-size:14px;font-weight:500;display:flex;align-items:center;justify-content:space-between;gap:8px;border-bottom:1px solid rgba(20,16,12,0.05);transition:background .12s;}
 .di:last-child{border-bottom:none;}
 .di:hover{background:rgba(212,168,67,0.09);color:var(--hero-darkred);}
 .di.kb-focus{background:rgba(212,168,67,0.15);color:var(--hero-darkred);outline:none;}
-.di-type{font-size:8.5px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:rgba(20,16,12,0.32);background:rgba(20,16,12,0.05);padding:2px 6px;border-radius:4px;flex-shrink:0;}
+.di-type{font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:rgba(20,16,12,0.32);background:rgba(20,16,12,0.05);padding:2px 6px;border-radius:4px;flex-shrink:0;}
 
 /* ── SPEC PANEL / CARD ── */
 .spec-spacer{display:none;}
 #bike-spec-panel{flex:0 0 0;width:0;margin-left:0;align-self:stretch;position:relative;min-height:0;opacity:0;pointer-events:none;overflow:visible;
   transition:flex-basis .36s cubic-bezier(.22,1,.36,1),width .36s cubic-bezier(.22,1,.36,1),margin-left .36s cubic-bezier(.22,1,.36,1),opacity .3s ease;}
-.crm-stage.stage-wide #bike-spec-panel{flex:0 0 420px;width:420px;margin-left:30px;pointer-events:auto;}
+.crm-stage.stage-wide #bike-spec-panel{flex:0 0 400px;width:400px;margin-left:24px;pointer-events:auto;}
 #bike-spec-panel.bsp-open{opacity:1;}
 #bike-spec-panel .bsc{position:absolute;inset:0;overflow-y:auto;scrollbar-width:thin;scrollbar-color:#cfc6b3 transparent;}
 #bike-spec-panel .bsc::-webkit-scrollbar{width:5px;}
 #bike-spec-panel .bsc::-webkit-scrollbar-thumb{background:#cfc6b3;border-radius:4px;}
 @media(max-width:1180px){
   .crm-stage{flex-direction:column;align-items:center;}
-  #bike-spec-panel{flex:0 0 auto;width:min(92vw,500px);margin-left:0;align-self:center;}
-  .crm-stage.stage-wide #bike-spec-panel{width:min(92vw,500px);margin-left:0;margin-top:20px;}
+  #bike-spec-panel{flex:0 0 auto;width:min(96vw,500px);margin-left:0;align-self:center;}
+  .crm-stage.stage-wide #bike-spec-panel{width:min(96vw,500px);margin-left:0;margin-top:20px;}
   #bike-spec-panel:not(.bsp-open){display:none;}
   #bike-spec-panel .bsc{position:relative;inset:auto;max-height:70vh;}
 }
@@ -175,38 +176,38 @@ button{padding:12px;margin:7px 0;cursor:pointer;border:none;border-radius:10px;h
 .bsc{position:relative;border-radius:18px;overflow:hidden;background:rgba(255,255,255,0.72);backdrop-filter:blur(24px) saturate(1.3);-webkit-backdrop-filter:blur(24px) saturate(1.3);
   border:1px solid rgba(255,255,255,0.6);box-shadow:0 18px 50px rgba(20,15,10,0.18);}
 .bsc::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;z-index:2;background:linear-gradient(90deg,var(--hero-red),var(--hero-gold));}
-.bsc-top{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;padding:18px 18px 4px;}
-.bsc-name{font-size:19px;font-weight:800;color:var(--hero-darkred);line-height:1.25;font-family:'Space Grotesk',sans-serif;}
-.bsc-badge{font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--hero-darkred);background:rgba(227,24,55,0.08);border:1px solid rgba(227,24,55,0.18);padding:3px 9px;border-radius:5px;white-space:nowrap;flex-shrink:0;}
-.bsc-category{padding:0 18px;font-size:11.5px;color:rgba(20,16,12,0.42);line-height:1.5;}
-.bsc-price{padding:8px 18px 2px;font-size:15px;font-weight:800;color:var(--hero-red);font-variant-numeric:tabular-nums;}
-.bsc-block-lbl{font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(20,16,12,0.32);padding:12px 18px 6px;display:flex;align-items:center;gap:8px;}
+.bsc-top{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;padding:20px 20px 4px;}
+.bsc-name{font-size:23px;font-weight:800;color:var(--hero-darkred);line-height:1.3;font-family:'Space Grotesk',sans-serif;}
+.bsc-badge{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--hero-darkred);background:rgba(227,24,55,0.08);border:1px solid rgba(227,24,55,0.18);padding:4px 10px;border-radius:5px;white-space:nowrap;flex-shrink:0;}
+.bsc-category{padding:0 20px;font-size:14px;color:rgba(20,16,12,0.5);line-height:1.5;}
+.bsc-price{padding:10px 20px 2px;font-size:19px;font-weight:800;color:var(--hero-red);font-variant-numeric:tabular-nums;}
+.bsc-block-lbl{font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(20,16,12,0.4);padding:14px 20px 6px;display:flex;align-items:center;gap:8px;}
 .bsc-block-lbl::before{content:'';width:14px;height:1.5px;background:rgba(227,24,55,0.5);border-radius:2px;}
-.bsc-tags{display:flex;flex-wrap:wrap;gap:5px;padding:2px 18px 8px;}
-.bsc-tag{font-size:9px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:rgba(20,16,12,0.5);background:rgba(20,16,12,0.05);border:1px solid rgba(20,16,12,0.1);padding:3px 8px;border-radius:5px;}
-.bsc-specs{padding:2px 18px 8px;}
-.bsc-row{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;padding:7px 0;border-bottom:1px solid rgba(20,16,12,0.06);}
+.bsc-tags{display:flex;flex-wrap:wrap;gap:6px;padding:2px 20px 10px;}
+.bsc-tag{font-size:11.5px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:rgba(20,16,12,0.58);background:rgba(20,16,12,0.06);border:1px solid rgba(20,16,12,0.12);padding:4px 9px;border-radius:5px;}
+.bsc-specs{padding:2px 20px 10px;}
+.bsc-row{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;padding:9px 0;border-bottom:1px solid rgba(20,16,12,0.06);}
 .bsc-row:last-child{border-bottom:none;}
-.bsc-lbl{font-size:9.5px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:rgba(20,16,12,0.32);flex-shrink:0;padding-top:1px;white-space:nowrap;}
-.bsc-val{font-size:12px;font-weight:600;color:rgba(20,16,12,0.78);text-align:right;line-height:1.45;}
-.bsc-usp{margin:0;padding:2px 34px 8px 34px;list-style:disc;}
-.bsc-usp li{font-size:11.5px;color:rgba(20,16,12,0.62);line-height:1.6;margin-bottom:2px;}
-.bsc-why{margin:6px 18px 12px;padding:9px 12px;font-size:11px;line-height:1.55;color:rgba(154,20,40,0.85);background:rgba(212,168,67,0.08);border:1px solid rgba(212,168,67,0.22);border-radius:8px;}
-.bsc-foot{padding:9px 18px 14px;font-size:9.5px;letter-spacing:.3px;text-align:center;color:rgba(20,16,12,0.3);border-top:1px solid rgba(20,16,12,0.05);}
+.bsc-lbl{font-size:12px;font-weight:700;letter-spacing:0.8px;text-transform:uppercase;color:rgba(20,16,12,0.4);flex-shrink:0;padding-top:1px;white-space:nowrap;}
+.bsc-val{font-size:15px;font-weight:600;color:rgba(20,16,12,0.85);text-align:right;line-height:1.5;}
+.bsc-usp{margin:0;padding:2px 36px 10px 36px;list-style:disc;}
+.bsc-usp li{font-size:14.5px;color:rgba(20,16,12,0.72);line-height:1.65;margin-bottom:4px;}
+.bsc-why{margin:8px 20px 14px;padding:11px 14px;font-size:14px;line-height:1.6;color:rgba(154,20,40,0.9);background:rgba(212,168,67,0.08);border:1px solid rgba(212,168,67,0.22);border-radius:8px;}
+.bsc-foot{padding:10px 20px 16px;font-size:11.5px;letter-spacing:.3px;text-align:center;color:rgba(20,16,12,0.35);border-top:1px solid rgba(20,16,12,0.05);}
 .bsc-empty{padding:60px 24px;text-align:center;color:rgba(20,16,12,0.28);font-size:13px;}
 
 /* ── FOOTER ── */
 .re-footer{width:100%;margin-top:0;background:#f0ebe0;border-top:2px solid rgba(227,24,55,0.12);box-sizing:border-box;position:relative;z-index:10;}
-.re-footer-inner{max-width:900px;margin:0 auto;padding:30px 40px 20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px;}
-.re-footer-made{font-size:12.5px;color:rgba(20,16,12,0.45);}
+.re-footer-inner{max-width:900px;margin:0 auto;padding:18px 40px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px;}
+.re-footer-made{font-size:13px;color:rgba(20,16,12,0.45);}
 .re-footer-made strong{color:var(--hero-darkred);}
-.clock-box{background:rgba(212,168,67,0.05);border:1px solid rgba(212,168,67,0.14);border-radius:11px;padding:10px 16px;display:flex;align-items:center;gap:10px;}
+.clock-box{background:rgba(212,168,67,0.05);border:1px solid rgba(212,168,67,0.14);border-radius:11px;padding:8px 16px;display:flex;align-items:center;gap:10px;}
 .clock-time{display:flex;align-items:baseline;gap:2px;}
-.clock-num{font-size:18px;font-weight:300;color:var(--hero-darkred);letter-spacing:1px;font-variant-numeric:tabular-nums;line-height:1;}
-.clock-sep{font-size:15px;font-weight:200;color:rgba(154,20,40,0.25);padding:0 1px;}
+.clock-num{font-size:17px;font-weight:300;color:var(--hero-darkred);letter-spacing:1px;font-variant-numeric:tabular-nums;line-height:1;}
+.clock-sep{font-size:14px;font-weight:200;color:rgba(154,20,40,0.25);padding:0 1px;}
 .clock-ampm{font-size:10px;font-weight:600;color:rgba(154,20,40,0.5);letter-spacing:1px;align-self:flex-end;padding-bottom:1px;}
-.clock-date{font-size:10.5px;color:rgba(20,16,12,0.35);}
-.re-footer-bar{border-top:1px solid rgba(20,16,12,0.06);text-align:center;padding:10px 16px;color:rgba(20,16,12,0.22);font-size:11px;letter-spacing:0.4px;}
+.clock-date{font-size:11px;color:rgba(20,16,12,0.35);}
+.re-footer-bar{border-top:1px solid rgba(20,16,12,0.06);text-align:center;padding:8px 16px;color:rgba(20,16,12,0.22);font-size:11px;letter-spacing:0.4px;}
 .re-footer-bar span{color:rgba(154,20,40,0.4);}
 
 /* ── SIDE PANEL (hamburger) ── */
@@ -214,29 +215,29 @@ button{padding:12px;margin:7px 0;cursor:pointer;border:none;border-radius:10px;h
 .hbg-overlay.is-open{background:rgba(0,0,0,0.5);pointer-events:all;}
 .hbg-panel{position:fixed;top:0;right:0;height:100%;width:min(380px,92vw);z-index:200001;background:#ffffff;border-left:1px solid rgba(20,16,12,0.08);display:flex;flex-direction:column;transform:translateX(100%);transition:transform .38s cubic-bezier(.77,0,.18,1);box-shadow:-8px 0 40px rgba(0,0,0,0.12);overflow:hidden;}
 .hbg-panel.is-open{transform:translateX(0);}
-.hbg-header{display:flex;align-items:center;justify-content:space-between;padding:26px 28px 22px;border-bottom:1px solid rgba(20,16,12,0.07);flex-shrink:0;}
+.hbg-header{display:flex;align-items:center;justify-content:space-between;padding:24px 26px 20px;border-bottom:1px solid rgba(20,16,12,0.07);flex-shrink:0;}
 .hbg-title{font-size:14px;font-weight:700;letter-spacing:0.4px;color:rgba(20,16,12,0.82);}
-.hbg-close{width:40px;height:40px;border-radius:10px;background:rgba(20,16,12,0.04);border:1px solid rgba(20,16,12,0.09);color:rgba(20,16,12,0.45);font-size:20px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .18s,color .18s,border-color .18s;}
+.hbg-close{width:38px;height:38px;border-radius:10px;background:rgba(20,16,12,0.04);border:1px solid rgba(20,16,12,0.09);color:rgba(20,16,12,0.45);font-size:19px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .18s,color .18s,border-color .18s;}
 .hbg-close:hover{background:rgba(212,168,67,0.1);border-color:rgba(212,168,67,0.3);color:var(--hero-darkred);}
-.hbg-body{flex:1;overflow-y:auto;padding:28px 28px 16px;}
-.hbg-footer{padding:18px 28px;border-top:1px solid rgba(20,16,12,0.06);text-align:center;font-size:11px;color:rgba(20,16,12,0.18);letter-spacing:0.5px;flex-shrink:0;}
+.hbg-body{flex:1;overflow-y:auto;padding:26px 26px 16px;}
+.hbg-footer{padding:16px 26px;border-top:1px solid rgba(20,16,12,0.06);text-align:center;font-size:11px;color:rgba(20,16,12,0.18);letter-spacing:0.5px;flex-shrink:0;}
 
 .theme-toggle-section{margin-top:4px;}
-.theme-scene-card{width:100%;height:88px;border-radius:18px;cursor:pointer;position:relative;overflow:hidden;border:none;padding:0;transition:transform .18s ease,box-shadow .22s ease;display:block;}
+.theme-scene-card{width:100%;height:86px;border-radius:18px;cursor:pointer;position:relative;overflow:hidden;border:none;padding:0;transition:transform .18s ease,box-shadow .22s ease;display:block;}
 .theme-scene-card:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(0,0,0,0.14);}
 .theme-scene-card:active{transform:scale(0.98);}
 .tsc-sky{position:absolute;inset:0;background:linear-gradient(180deg,#87CEEB 0%,#b8e0f7 55%,#fde8c8 100%);transition:background 0.6s ease;}
 .tsc-stars{position:absolute;inset:0;opacity:0;background-image:radial-gradient(1px 1px at 15% 18%,#fff 50%,transparent 52%),radial-gradient(1.5px 1.5px at 30% 12%,#fff 50%,transparent 52%),radial-gradient(1px 1px at 55% 22%,#fff 50%,transparent 52%),radial-gradient(1px 1px at 70% 10%,#fff 50%,transparent 52%),radial-gradient(1.5px 1.5px at 82% 20%,#fff 50%,transparent 52%),radial-gradient(1px 1px at 92% 14%,#fff 50%,transparent 52%),radial-gradient(1px 1px at 45% 8%,#fff 50%,transparent 52%);transition:opacity 0.5s ease;}
-.tsc-sun{position:absolute;top:14px;right:20px;width:30px;height:30px;border-radius:50%;background:radial-gradient(circle at 40% 35%,#fff5a0,#FFD700 55%,#f5a800);box-shadow:0 0 18px 6px rgba(255,215,0,0.45);transition:transform 0.55s cubic-bezier(.77,0,.18,1),opacity 0.4s ease;}
-.tsc-moon{position:absolute;top:14px;right:20px;width:26px;height:26px;border-radius:50%;background:#e8e8d0;box-shadow:inset -5px -2px 0 0 #b8b8a0;opacity:0;transform:translateY(-20px) scale(0.7);transition:transform 0.55s cubic-bezier(.77,0,.18,1),opacity 0.4s ease;}
-.tsc-mountains{position:absolute;bottom:22px;left:0;right:0;height:36px;clip-path:polygon(0% 100%,0% 55%,8% 32%,16% 55%,26% 18%,38% 52%,48% 28%,60% 56%,70% 34%,82% 58%,92% 25%,100% 50%,100% 100%);background:#8fb08a;transition:background 0.5s ease;}
-.tsc-road{position:absolute;bottom:0;left:0;right:0;height:22px;background:#c8bfb2;transition:background 0.5s ease;}
+.tsc-sun{position:absolute;top:14px;right:20px;width:28px;height:28px;border-radius:50%;background:radial-gradient(circle at 40% 35%,#fff5a0,#FFD700 55%,#f5a800);box-shadow:0 0 18px 6px rgba(255,215,0,0.45);transition:transform 0.55s cubic-bezier(.77,0,.18,1),opacity 0.4s ease;}
+.tsc-moon{position:absolute;top:14px;right:20px;width:24px;height:24px;border-radius:50%;background:#e8e8d0;box-shadow:inset -5px -2px 0 0 #b8b8a0;opacity:0;transform:translateY(-20px) scale(0.7);transition:transform 0.55s cubic-bezier(.77,0,.18,1),opacity 0.4s ease;}
+.tsc-mountains{position:absolute;bottom:20px;left:0;right:0;height:34px;clip-path:polygon(0% 100%,0% 55%,8% 32%,16% 55%,26% 18%,38% 52%,48% 28%,60% 56%,70% 34%,82% 58%,92% 25%,100% 50%,100% 100%);background:#8fb08a;transition:background 0.5s ease;}
+.tsc-road{position:absolute;bottom:0;left:0;right:0;height:20px;background:#c8bfb2;transition:background 0.5s ease;}
 .tsc-road::after{content:'';position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:60%;height:2px;background:repeating-linear-gradient(90deg,rgba(255,255,255,0.7) 0,rgba(255,255,255,0.7) 14px,transparent 14px,transparent 26px);}
-.tsc-label{position:absolute;bottom:26px;left:16px;background:rgba(255,255,255,0.75);backdrop-filter:blur(4px);border-radius:20px;padding:3px 10px;font-size:10px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:#3a352c;transition:background 0.4s,color 0.4s;}
-.hbg-note{margin-top:16px;padding:11px 14px;background:rgba(212,168,67,0.05);border:1px solid rgba(212,168,67,0.14);border-radius:10px;font-size:11px;color:rgba(20,16,12,0.42);line-height:1.6;}
+.tsc-label{position:absolute;bottom:24px;left:16px;background:rgba(255,255,255,0.75);backdrop-filter:blur(4px);border-radius:20px;padding:3px 10px;font-size:10px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:#3a352c;transition:background 0.4s,color 0.4s;}
+.hbg-note{margin-top:16px;padding:11px 14px;background:rgba(212,168,67,0.05);border:1px solid rgba(212,168,67,0.14);border-radius:10px;font-size:12px;color:rgba(20,16,12,0.45);line-height:1.6;}
 
 /* ── TOAST + CONFIRM ── */
-#_reToast{position:fixed;left:50%;bottom:34px;transform:translateX(-50%) translateY(16px);background:rgba(20,20,20,.92);color:#fff;padding:12px 22px;border-radius:12px;font-weight:600;font-size:15px;letter-spacing:.2px;box-shadow:0 10px 30px rgba(0,0,0,.35);opacity:0;pointer-events:none;z-index:200000;transition:opacity .2s ease,transform .2s ease;}
+#_reToast{position:fixed;left:50%;bottom:30px;transform:translateX(-50%) translateY(16px);background:rgba(20,20,20,.92);color:#fff;padding:12px 22px;border-radius:12px;font-weight:600;font-size:15px;letter-spacing:.2px;box-shadow:0 10px 30px rgba(0,0,0,.35);opacity:0;pointer-events:none;z-index:200000;transition:opacity .2s ease,transform .2s ease;}
 #_reToast.show{opacity:1;transform:translateX(-50%) translateY(0);}
 .re-confirm-ov{position:fixed;inset:0;background:rgba(0,0,0,.42);backdrop-filter:blur(3px);display:flex;align-items:center;justify-content:center;z-index:200001;opacity:0;transition:opacity .2s ease;padding:20px;}
 .re-confirm-ov.show{opacity:1;}
@@ -291,7 +292,6 @@ body.dark-mode .re-confirm-cancel{background:#2a2a2a!important;color:#ddd!import
         <div class="tsc-label" id="hbgThemeTitle">☀️ Day Mode</div>
       </button>
     </div>
-    <div class="hbg-note">Hover or select any <span style="color:var(--hero-darkred);font-weight:600;">Model</span> in the form to see its full spec &amp; USP card appear alongside the CRM box.</div>
   </div>
   <div class="hbg-footer">Hero MotoCorp CRM · Local &amp; Offline</div>
 </nav>
@@ -303,6 +303,7 @@ body.dark-mode .re-confirm-cancel{background:#2a2a2a!important;color:#ddd!import
     <div class="box">
       <h2>Hero MotoCorp CRM</h2>
       <button class="topBtn" onclick="setMode('l1')">L1</button>
+      <button class="topBtn" onclick="setMode('l2booking')">L2 Booking</button>
       <button class="topBtn" onclick="setMode('l2booked')">L2 Booked</button>
       <button class="topBtn" onclick="setMode('l2retail')">L2 Retail</button>
 
@@ -342,6 +343,18 @@ body.dark-mode .re-confirm-cancel{background:#2a2a2a!important;color:#ddd!import
         <input id="r2_regChassisInvoice" placeholder="Reg. No. / Chassis / Invoice No. / Order ID">
       </div>
 
+      <!-- ===== L2 - BOOKING (visit stage) ===== -->
+      <div id="l2BookingSection" class="hide">
+        <div class="csw" id="wrap_b3_model"><div class="cst" id="trig_b3_model" tabindex="0">Select Model</div><div class="cdrop" id="drop_b3_model"></div></div>
+        <input type="hidden" id="b3_model">
+        <input id="b3_dealerVisitTime" placeholder="Dealer visit time">
+        <input id="b3_expectedPurchaseDate" placeholder="Expected purchase date">
+        <input id="b3_dealership" placeholder="Dealership">
+        <input id="b3_bookingName" placeholder="Customer Booking name">
+        <input id="b3_altNumber" placeholder="Alternate number">
+        <input id="b3_keyEnquiry" placeholder="Key Enquiry">
+      </div>
+
       <div style="display:flex;justify-content:space-between;position:relative;z-index:1;">
         <button class="copyBtn" onclick="copyData()">Copy</button>
         <button class="resetBtn" onclick="resetForm()">Reset</button>
@@ -372,7 +385,7 @@ body.dark-mode .re-confirm-cancel{background:#2a2a2a!important;color:#ddd!import
 </footer>
 
 <script>
-// ─── HERO BIKE DATA ─────────────────────────────────────────────────────────
+// ─── HERO BIKE DATA (curated model list only) ───────────────────────────────
 const bikeData = [
 { name:"Hero Passion Plus", type:"Bike", category:"Entry Commuter (Up to 100cc)", price:"₹80,328 onwards", segment:"Entry Commuter", engine:"97.2cc", mileage:"60-70 kmpl",
   keyUSP:["Sportier graphics/body panels than HF Deluxe","Same reliable 97.2cc motor","Positioned as a 'young commuter' option","Contemporary styling for slightly younger audience","Splendor/HF Deluxe reliability"],
@@ -410,6 +423,14 @@ const bikeData = [
   keyUSP:["New-generation liquid-cooled DOHC engine","USD front forks","6-speed gearbox with slip/assist clutch","Road/Track switchable ABS","Aggressive streetfighter styling that looks like a 400cc bike","Big-bike looks, performance and touring capability"],
   whyCustomersBuy:"Riders upgrading from 125–160cc bikes who want big-bike looks, performance and touring capability at a price well under rival 250cc bikes.",
   features:["DOHC Engine","USD Forks","Slip/Assist Clutch","Switchable ABS","6-Speed Gearbox","400cc Looks"], tags:["Performance","Premium","Track","Big-Bike"] },
+{ name:"Hero XPulse 200 4V", type:"Bike", category:"200cc Adventure/Off-Road", price:"₹1,45,407 onwards", segment:"Adventure/Off-Road", engine:"200cc 4-Valve", mileage:"35-40 kmpl",
+  keyUSP:["Long-travel suspension","Off-road-biased tyres","220mm ground clearance","Switchable ABS for off-roading","Genuine off-road/dirt capability","Daily usability, well below premium ADV pricing"],
+  whyCustomersBuy:"Riders who want genuine off-road/dirt capability plus daily usability, well below premium ADV pricing.",
+  features:["Long-Travel Suspension","Off-Road Tyres","220mm Ground Clearance","Switchable ABS","Rally-Inspired"], tags:["Off-Road","Adventure","Rally","Capability"] },
+{ name:"Hero Super Splendor XTEC", type:"Bike", category:"125cc Commuter — Premium Splendor", price:"₹84,448 – ₹90,000", segment:"Premium 125cc Splendor", engine:"125cc", mileage:"Up to 75 kmpl claimed",
+  keyUSP:["More power and torque than 100cc Splendor Plus","Bluetooth connectivity","Silent start-stop tech","Up to 75 kmpl claimed mileage","125cc performance with Splendor badge"],
+  whyCustomersBuy:"Splendor buyers who want more engine performance (125cc) without leaving the trusted Splendor badge.",
+  features:["125cc Power","Bluetooth","Silent Start-Stop","High Mileage","Splendor Badge"], tags:["125cc","Premium","Connected","Mileage"] },
 { name:"Hero Pleasure Plus", type:"Scooter", category:"110cc Scooter", price:"₹69,766 onwards", segment:"Entry Scooter", engine:"110cc", mileage:"55-60 kmpl",
   keyUSP:["India's first scooter marketed with 'Why should boys have all the fun?'","Lightweight, easy-to-ride commuter scooter","Large underseat storage","Cheapest and most familiar scooter nameplate"],
   whyCustomersBuy:"First-time riders, women commuters and families wanting Hero's cheapest and most familiar scooter nameplate.",
@@ -433,51 +454,7 @@ const bikeData = [
 { name:"Hero Xoom 125", type:"Scooter", category:"125cc Sporty Scooter", price:"₹83,394 onwards", segment:"Sporty 125cc", engine:"125cc", mileage:"45-50 kmpl",
   keyUSP:["Bigger 125cc motor than Xoom 110","Sportier handling dynamics","Aimed at TVS NTorq/Suzuki Avenis buyers","More outright performance for daily commuting","New launch at Auto Expo 2025"],
   whyCustomersBuy:"Riders who liked the Xoom 110's sporty character but want more outright performance for daily commuting.",
-  features:["125cc Performance","Sporty Dynamics","Auto Expo 2025","NTorq/Avenis Rival","Daily Commuter"], tags:["New Launch","Sporty","Performance","125cc"] },
-{ name:"Hero HF 100", type:"Bike", category:"Entry Commuter (Up to 100cc)", price:"₹59,839 onwards", segment:"Entry Level", engine:"100cc", mileage:"70-75 kmpl",
-  keyUSP:["Lowest price point in Hero's entire line-up","Simple air-cooled engine","Kick/self start options","Extremely low running cost","Bare-minimum ownership cost"],
-  whyCustomersBuy:"First-time bike buyers / rural & price-sensitive buyers who want bare-minimum ownership cost.",
-  features:["Lowest Price","Kick/Self Start","Low Running Cost","Simple Engine"], tags:["Cheapest","Rural","Economy","Entry"] },
-{ name:"Hero HF Deluxe", type:"Bike", category:"Entry Commuter (Up to 100cc)", price:"₹59,477 – ₹70,442", segment:"Benchmark Commuter", engine:"97.2cc", mileage:"65-75 kmpl",
-  keyUSP:["i3S idle stop-start for extra mileage","Integrated Braking System (CBS)","Tubeless tyres","5-year warranty","One of India's best-selling bikes overall","Unmatched service/spare-parts network"],
-  whyCustomersBuy:"Cost-conscious daily commuters and delivery riders wanting reliability, low maintenance and Hero's unmatched service network.",
-  features:["i3S Technology","CBS","Tubeless Tyres","5-Year Warranty","Best-Seller","Service Network"], tags:["Best-Seller","Reliability","Mileage","CBS"] },
-{ name:"Hero HF Deluxe Pro", type:"Bike", category:"Entry Commuter (Up to 100cc)", price:"₹72,620 onwards", segment:"Premium Entry", engine:"97.2cc", mileage:"65-75 kmpl",
-  keyUSP:["Same frugal 97.2cc engine as HF Deluxe","Fresher graphics","Slightly upgraded console","Marginally more premium look"],
-  whyCustomersBuy:"Buyers who want the HF Deluxe's low running cost but a marginally more premium look.",
-  features:["Premium Graphics","Upgraded Console","Same Engine","Better Look"], tags:["Premium Look","Graphics","Console","Value"] },
-{ name:"Hero HF Deluxe Flex Fuel", type:"Bike", category:"Entry Commuter (Up to 100cc) — Flex Fuel", price:"₹81,753 onwards", segment:"Flex Fuel", engine:"97.2cc Flex Fuel", mileage:"Varies by blend",
-  keyUSP:["Can run on E20 to E85 ethanol-petrol blends","Slightly more power/torque than regular HF Deluxe","Future-ready fuel flexibility","Rolling out first in Delhi & Maharashtra"],
-  whyCustomersBuy:"Early adopters wanting to hedge against fuel costs/availability as India expands ethanol-blended fuel.",
-  features:["E85 Compatible","Ethanol Blends","More Power","Future-Ready","Delhi/Maharashtra First"], tags:["Flex Fuel","Ethanol","Future","Innovation"] },
-{ name:"Hero XPulse 200 4V", type:"Bike", category:"200cc Adventure/Off-Road", price:"₹1,45,407 onwards", segment:"Adventure/Off-Road", engine:"200cc 4-Valve", mileage:"35-40 kmpl",
-  keyUSP:["Long-travel suspension","Off-road-biased tyres","220mm ground clearance","Switchable ABS for off-roading","Genuine off-road/dirt capability","Daily usability, well below premium ADV pricing"],
-  whyCustomersBuy:"Riders who want genuine off-road/dirt capability plus daily usability, well below premium ADV pricing.",
-  features:["Long-Travel Suspension","Off-Road Tyres","220mm Ground Clearance","Switchable ABS","Rally-Inspired"], tags:["Off-Road","Adventure","Rally","Capability"] },
-{ name:"Hero Xoom 160", type:"Scooter", category:"160cc Maxi-Scooter (Flagship)", price:"₹1,39,898 onwards", segment:"Flagship Maxi-Scooter", engine:"160cc Liquid-Cooled", mileage:"35-40 kmpl",
-  keyUSP:["Biggest, only liquid-cooled engine in Hero's scooter range","Maxi-scooter stance built for highway touring comfort","Highway cruising capability","Premium, big-bodied scooter experience"],
-  whyCustomersBuy:"Scooter buyers who want highway cruising capability and a premium, big-bodied scooter experience.",
-  features:["Liquid-Cooled","Maxi-Scooter Stance","Highway Touring","Flagship","Premium Comfort"], tags:["Maxi-Scooter","Flagship","Highway","Liquid-Cooled"] },
-{ name:"Hero Splendor Plus", type:"Bike", category:"Entry Commuter — World's Highest-Selling Motorcycle", price:"₹77,557 – ₹80,331", segment:"World's Best-Seller", engine:"97.2cc", mileage:"60-70 kmpl",
-  keyUSP:["Unmatched mileage (60-70 kmpl real world)","Extremely low maintenance","5-year warranty","Hero's biggest service/spare-parts network","World's highest-selling motorcycle"],
-  whyCustomersBuy:"Rural and price-sensitive daily commuters who want India's most trusted, lowest-running-cost motorcycle.",
-  features:["World's Best-Seller","Unmatched Mileage","Low Maintenance","5-Year Warranty","Biggest Network"], tags:["Best-Seller","Mileage","Trusted","Network"] },
-{ name:"Hero Splendor Plus XTEC", type:"Bike", category:"Entry Commuter — Connected", price:"₹81,283 – ₹84,326", segment:"Connected Commuter", engine:"97.2cc", mileage:"60-70 kmpl",
-  keyUSP:["Bluetooth-connected digital console (call/SMS alerts)","Real-time mileage tracking","LED DRL","More premium graphics on trusted Splendor platform","Connected features without leaving Splendor name"],
-  whyCustomersBuy:"Splendor loyalists who want modern connected features without leaving the trusted Splendor name.",
-  features:["Bluetooth Console","Call/SMS Alerts","Real-Time Mileage","LED DRL","Premium Graphics"], tags:["Connected","Bluetooth","Smart","Premium"] },
-{ name:"Hero Splendor Plus Flex Fuel", type:"Bike", category:"Entry Commuter — Flex Fuel", price:"₹82,710 onwards", segment:"Flex Fuel Commuter", engine:"97.2cc Flex Fuel", mileage:"Varies by blend",
-  keyUSP:["Future-ready fuel flexibility on India's most trusted motorcycle","Rolling out first in Delhi & Maharashtra","Ethanol-blending expansion ready","Hedge fuel costs"],
-  whyCustomersBuy:"Early adopters and environmentally-conscious buyers wanting to hedge fuel costs as ethanol-blending expands.",
-  features:["E5-E85 Compatible","Future-Ready","Delhi/Maharashtra First","Trusted Platform","Eco-Conscious"], tags:["Flex Fuel","Ethanol","Eco","Future"] },
-{ name:"Hero Super Splendor XTEC", type:"Bike", category:"125cc Commuter — Premium Splendor", price:"₹84,448 – ₹90,000", segment:"Premium 125cc Splendor", engine:"125cc", mileage:"Up to 75 kmpl claimed",
-  keyUSP:["More power and torque than 100cc Splendor Plus","Bluetooth connectivity","Silent start-stop tech","Up to 75 kmpl claimed mileage","125cc performance with Splendor badge"],
-  whyCustomersBuy:"Splendor buyers who want more engine performance (125cc) without leaving the trusted Splendor badge.",
-  features:["125cc Power","Bluetooth","Silent Start-Stop","High Mileage","Splendor Badge"], tags:["125cc","Premium","Connected","Mileage"] },
-{ name:"Hero Mavrick 440", type:"Bike", category:"440cc Roadster (Premium Flagship)", price:"₹2,13,207 – ₹2,39,924", segment:"Flagship 440cc", engine:"440cc", mileage:"~32 kmpl (ARAI)",
-  keyUSP:["Most affordable 440cc motorcycle in India","Undercuts Royal Enfield Classic 350, Triumph Speed 400 and Harley-Davidson X440","Developed with Harley-Davidson know-how","Genuine big-bike (440cc) ownership","Touring comfort at price well below premium rivals"],
-  whyCustomersBuy:"Buyers wanting genuine big-bike (440cc) ownership and touring comfort at a price well below premium retro-roadster rivals.",
-  features:["440cc Engine","Harley-Davidson Tech","Most Affordable 440cc","Touring Comfort","Big-Bike Ownership","Undercuts Rivals"], tags:["Flagship","440cc","Harley-Davidson","Premium","Touring"] }
+  features:["125cc Performance","Sporty Dynamics","Auto Expo 2025","NTorq/Avenis Rival","Daily Commuter"], tags:["New Launch","Sporty","Performance","125cc"] }
 ];
 const bikeByName = {};
 bikeData.forEach(b => bikeByName[b.name] = b);
@@ -547,7 +524,7 @@ function buildCustomDrop(wrapperId, triggerId, dropId, items, onSelect, placehol
   function open() {
     closeAllDropdowns(); wrapper.classList.add('open');
     requestAnimationFrame(() => {
-      const r = wrapper.getBoundingClientRect(), dh = Math.min(drop.scrollHeight, 340);
+      const r = wrapper.getBoundingClientRect(), dh = Math.min(drop.scrollHeight, 320);
       drop.classList.toggle('drop-up', window.innerHeight - r.bottom < dh + 8 && r.top > window.innerHeight - r.bottom);
     });
     setKb(0);
@@ -607,7 +584,7 @@ function advanceToNext(el) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  buildModelDropdown(); buildSectionModelDrop('b2','Select Booking Model'); buildSectionModelDrop('r2','Select Model');
+  buildModelDropdown(); buildSectionModelDrop('b2','Select Booking Model'); buildSectionModelDrop('r2','Select Model'); buildSectionModelDrop('b3','Select Model');
   document.addEventListener('keydown', e => {
     if (e.key !== 'Enter') return;
     const active = document.activeElement;
@@ -621,6 +598,7 @@ let currentMode = 'l1';
 function setMode(m) {
   currentMode = m;
   document.getElementById('l1Section').classList.toggle('hide', m !== 'l1');
+  document.getElementById('l2BookingSection').classList.toggle('hide', m !== 'l2booking');
   document.getElementById('l2BookedSection').classList.toggle('hide', m !== 'l2booked');
   document.getElementById('l2RetailSection').classList.toggle('hide', m !== 'l2retail');
   closeAllDropdowns();
@@ -644,6 +622,17 @@ function buildText(mode) {
       altNumber.value      && `Alternate Number - ${altNumber.value}`,
       testRide.value       && `Test ride suggestion - ${testRide.value}`,
       keyEnquiry.value     && `Key Enquiry - ${keyEnquiry.value}`
+    ].filter(Boolean).join('\n');
+  }
+  if (mode === 'l2booking') {
+    return [
+      b3_model.value                 && `Model - ${b3_model.value}`,
+      b3_dealerVisitTime.value       && `Dealer visit time - ${b3_dealerVisitTime.value}`,
+      b3_expectedPurchaseDate.value  && `Expected purchase date - ${b3_expectedPurchaseDate.value}`,
+      b3_dealership.value            && `Dealership - ${b3_dealership.value}`,
+      b3_bookingName.value           && `Customer Booking name - ${b3_bookingName.value}`,
+      b3_altNumber.value             && `Alternate number - ${b3_altNumber.value}`,
+      b3_keyEnquiry.value            && `Key Enquiry - ${b3_keyEnquiry.value}`
     ].filter(Boolean).join('\n');
   }
   if (mode === 'l2booked') {
@@ -704,7 +693,7 @@ function showConfirm(title, msg, onYes){
 function resetForm() { showConfirm('Reset everything?', 'All entered data will be cleared.', doResetForm); }
 function doResetForm() {
   document.querySelectorAll('input').forEach(el => { if (!el.hasAttribute('readonly')) el.value = ''; });
-  [['trig_model','Select Model'],
+  [['trig_model','Select Model'],['trig_b3_model','Select Model'],
    ['trig_b2_model','Select Booking Model'],['trig_r2_model','Select Model']].forEach(([id,ph]) => {
     const el = document.getElementById(id); if(!el) return;
     el.textContent = ph; el.classList.remove('has-value');
