@@ -72,6 +72,17 @@ body.dark-mode .bsc-val{color:rgba(255,255,255,0.82)!important;}
 body.dark-mode .bsc-usp li{color:rgba(255,255,255,0.65)!important;}
 body.dark-mode .bsc-why{color:rgba(255,255,255,0.5)!important;background:rgba(255,255,255,0.04)!important;border-color:rgba(255,255,255,0.08)!important;}
 body.dark-mode .bsc-foot{color:rgba(255,255,255,0.28)!important;border-top-color:rgba(255,255,255,0.06)!important;}
+body.dark-mode .bsc-block-lbl{color:rgba(255,255,255,0.4)!important;}
+body.dark-mode .bsc-category{color:rgba(255,255,255,0.5)!important;}
+body.dark-mode .dpc-row{border-bottom-color:rgba(255,255,255,0.08)!important;}
+body.dark-mode .dpc-row-gap{border-top-color:rgba(255,255,255,0.08)!important;}
+body.dark-mode .dpc-row:hover{background:rgba(212,168,67,0.1)!important;}
+body.dark-mode .dpc-row-main{color:rgba(255,255,255,0.9)!important;}
+body.dark-mode .dpc-row-sub{color:rgba(255,255,255,0.4)!important;}
+body.dark-mode .dpc-back{color:rgba(255,255,255,0.35)!important;}
+body.dark-mode .dpc-back:hover{color:var(--hero-gold)!important;}
+body.dark-mode .dpc-dispo{color:#ff9a76!important;}
+body.dark-mode .dpc-lms{color:rgba(255,255,255,0.85)!important;}
 body.dark-mode .bsc-badge{color:var(--hero-gold)!important;background:rgba(0,0,0,0.5)!important;border-color:rgba(212,168,67,0.25)!important;}
 body.dark-mode .re-footer{background:#0a0a0a!important;border-top-color:rgba(212,168,67,0.14)!important;}
 body.dark-mode .re-footer-bar{color:rgba(255,255,255,0.18)!important;border-top-color:rgba(255,255,255,0.05)!important;}
@@ -156,8 +167,7 @@ button{padding:12px;margin:7px 0;cursor:pointer;border:none;border-radius:10px;h
 .di.kb-focus{background:rgba(212,168,67,0.15);color:var(--hero-darkred);outline:none;}
 .di-type{font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:rgba(20,16,12,0.32);background:rgba(20,16,12,0.05);padding:2px 6px;border-radius:4px;flex-shrink:0;}
 
-/* ── SPEC PANEL / CARD ── */
-.spec-spacer{display:none;}
+/* ── SPEC PANEL / CARD (right) ── */
 #bike-spec-panel{flex:0 0 0;width:0;margin-left:0;align-self:stretch;position:relative;min-height:0;opacity:0;pointer-events:none;overflow:visible;
   transition:flex-basis .36s cubic-bezier(.22,1,.36,1),width .36s cubic-bezier(.22,1,.36,1),margin-left .36s cubic-bezier(.22,1,.36,1),opacity .3s ease;}
 .crm-stage.stage-wide #bike-spec-panel{flex:0 0 400px;width:400px;margin-left:24px;pointer-events:auto;}
@@ -165,12 +175,38 @@ button{padding:12px;margin:7px 0;cursor:pointer;border:none;border-radius:10px;h
 #bike-spec-panel .bsc{position:absolute;inset:0;overflow-y:auto;scrollbar-width:thin;scrollbar-color:#cfc6b3 transparent;}
 #bike-spec-panel .bsc::-webkit-scrollbar{width:5px;}
 #bike-spec-panel .bsc::-webkit-scrollbar-thumb{background:#cfc6b3;border-radius:4px;}
+
+/* ── DISPOSITION PANEL / CARD (left) ── */
+#disp-panel{flex:0 0 0;width:0;margin-right:0;align-self:stretch;position:relative;min-height:0;opacity:0;pointer-events:none;overflow:visible;
+  transition:flex-basis .36s cubic-bezier(.22,1,.36,1),width .36s cubic-bezier(.22,1,.36,1),margin-right .36s cubic-bezier(.22,1,.36,1),opacity .3s ease;}
+.crm-stage.stage-wide-left #disp-panel{flex:0 0 340px;width:340px;margin-right:24px;pointer-events:auto;}
+#disp-panel.dp-open{opacity:1;}
+#disp-panel .bsc{position:absolute;inset:0;overflow-y:auto;scrollbar-width:thin;scrollbar-color:#cfc6b3 transparent;}
+#disp-panel .bsc::-webkit-scrollbar{width:5px;}
+#disp-panel .bsc::-webkit-scrollbar-thumb{background:#cfc6b3;border-radius:4px;}
+.dpc-list{padding:4px 20px 14px;}
+.dpc-row{padding:19px 2px;border-bottom:1px solid rgba(20,16,12,0.08);cursor:pointer;transition:background .15s ease;}
+.dpc-row:last-child{border-bottom:none;}
+.dpc-row:hover{background:rgba(212,168,67,0.07);margin:0 -10px;padding:19px 12px;border-radius:8px;}
+.dpc-row-main{font-size:14.5px;font-weight:700;color:#1a1714;}
+.dpc-row-sub{font-size:12px;font-weight:600;color:rgba(20,16,12,0.42);margin-top:5px;}
+.dpc-row-gap{margin-top:20px;padding-top:26px;border-top:1px solid rgba(20,16,12,0.08);}
+.dpc-back{padding:14px 20px 4px;font-size:12px;font-weight:700;color:rgba(20,16,12,0.4);cursor:pointer;text-decoration:underline;text-underline-offset:2px;display:inline-block;}
+.dpc-back:hover{color:var(--hero-darkred);}
+.dpc-dispo{padding:2px 20px 4px;font-size:26px;font-weight:800;color:var(--hero-red);font-family:'Space Grotesk',sans-serif;letter-spacing:0.5px;}
+.dpc-lms{padding:0 20px 6px;font-size:15px;font-weight:600;color:rgba(20,16,12,0.8);line-height:1.5;}
+
+
 @media(max-width:1180px){
   .crm-stage{flex-direction:column;align-items:center;}
   #bike-spec-panel{flex:0 0 auto;width:min(96vw,500px);margin-left:0;align-self:center;}
   .crm-stage.stage-wide #bike-spec-panel{width:min(96vw,500px);margin-left:0;margin-top:20px;}
   #bike-spec-panel:not(.bsp-open){display:none;}
   #bike-spec-panel .bsc{position:relative;inset:auto;max-height:70vh;}
+  #disp-panel{flex:0 0 auto;width:min(96vw,500px);margin-right:0;align-self:center;}
+  .crm-stage.stage-wide-left #disp-panel{width:min(96vw,500px);margin-right:0;margin-bottom:20px;}
+  #disp-panel:not(.dp-open){display:none;}
+  #disp-panel .bsc{position:relative;inset:auto;max-height:70vh;}
 }
 
 .bsc{position:relative;border-radius:18px;overflow:hidden;background:rgba(255,255,255,0.72);backdrop-filter:blur(24px) saturate(1.3);-webkit-backdrop-filter:blur(24px) saturate(1.3);
@@ -299,16 +335,16 @@ body.dark-mode .re-confirm-cancel{background:#2a2a2a!important;color:#ddd!import
 <!-- ===== HERO / CRM SECTION ===== -->
 <div class="hero-section" id="heroSection">
   <div class="crm-stage">
-    <div class="spec-spacer" aria-hidden="true"></div>
+    <div id="disp-panel" aria-hidden="true"></div>
     <div class="box">
       <h2>Hero MotoCorp CRM</h2>
-      <button class="topBtn" onclick="setMode('l1')">L1</button>
       <button class="topBtn" onclick="setMode('l2booking')">L2 Booking</button>
       <button class="topBtn" onclick="setMode('l2booked')">L2 Booked</button>
       <button class="topBtn" onclick="setMode('l2retail')">L2 Retail</button>
+      <button class="topBtn" onclick="setMode('l1')">L1</button>
 
       <!-- ===== L1 ===== -->
-      <div id="l1Section">
+      <div id="l1Section" class="hide">
         <div class="csw" id="wrap_model"><div class="cst" id="trig_model" tabindex="0">Select Model</div><div class="cdrop" id="drop_model"></div></div>
         <input type="hidden" id="model">
         <input id="buyingTime" placeholder="Buying time">
@@ -344,7 +380,7 @@ body.dark-mode .re-confirm-cancel{background:#2a2a2a!important;color:#ddd!import
       </div>
 
       <!-- ===== L2 - BOOKING (visit stage) ===== -->
-      <div id="l2BookingSection" class="hide">
+      <div id="l2BookingSection">
         <div class="csw" id="wrap_b3_model"><div class="cst" id="trig_b3_model" tabindex="0">Select Model</div><div class="cdrop" id="drop_b3_model"></div></div>
         <input type="hidden" id="b3_model">
         <input id="b3_dealerVisitTime" placeholder="Dealer visit time">
@@ -503,6 +539,180 @@ function attachModelHover(dropId){
   });
 }
 
+// ─── DISPOSITION ENGINE ──────────────────────────────────────────────────
+const DISPO_INFO = {
+  L1_VRF:  { label:'L1_VRF',  lms:'Schedule Callback' },
+  L1_CB:   { label:'Callback', lms:'Schedule Callback' },
+  RETAIL:  { label:'RETAIL',  lms:'Retail' },
+  RTLDCR:  { label:'RTLDCR',  lms:'Pending Retail (Under Booking category)' },
+  L2_CB:   { label:'CallBack', lms:'Schedule Callback' },
+  BR:      { label:'BR',      lms:'Booking request in LMS (Call back in LMS)' },
+  ST_VST:  { label:'ST_VST',  lms:'Schedule Dealer visit in LMS' },
+  ST_NDC:  { label:'ST_NDC',  lms:'Schedule Dealer visit in LMS' },
+  NDC_INT: { label:'NDC_INT', lms:'Schedule Callback in LMS' },
+  SV_LOST: { label:'SV_Lost', lms:'Lost under defined category' },
+  INT:     { label:'INT',     lms:'Schedule Callback in LMS' },
+  LSTP:    { label:'LSTP',    lms:'Lost under defined category' },
+  LSTNP:   { label:'LSTNP',   lms:'Lost under defined category' },
+  BOOKED:  { label:'Booked',  lms:'Booking confirmed' }
+};
+
+let dispoState = {
+  l1Time: null,
+  b2Confirmed: null,
+  bk: { purchase:null, visited:null, timeline:null, visitSched:null, dealerCall:null }
+};
+function resetDispoState(){
+  dispoState = { l1Time:null, b2Confirmed:null, bk:{ purchase:null, visited:null, timeline:null, visitSched:null, dealerCall:null } };
+}
+
+function hasAnyInput(mode){
+  if (mode === 'l1') return !!(model.value||buyingTime.value||dealerName.value||dealerLoc.value||l1_bookingName.value||altNumber.value||testRide.value||keyEnquiry.value);
+  if (mode === 'l2booking') return !!(b3_model.value||b3_dealerVisitTime.value||b3_expectedPurchaseDate.value||b3_dealership.value||b3_bookingName.value||b3_altNumber.value||b3_keyEnquiry.value);
+  if (mode === 'l2booked') return !!(b2_model.value||b2_dealershipName.value||b2_bookingDate.value||b2_bookingName.value||b2_bookingMobile.value||b2_expectedPurchaseDate.value);
+  if (mode === 'l2retail') return !!(r2_model.value||r2_dateOfPurchase.value||r2_dealershipName.value||r2_dealerLocation.value||r2_bookingName.value||r2_bookingMobile.value||r2_regChassisInvoice.value);
+  return false;
+}
+
+function computeL1(){
+  if (!dispoState.l1Time) return null;
+  return dispoState.l1Time === 'lte1' ? 'L1_VRF' : 'L1_CB';
+}
+function computeL2Retail(){
+  const p1Core  = r2_model.value.trim() && r2_dateOfPurchase.value.trim();
+  const p1Other = (r2_dealershipName.value.trim()||r2_dealerLocation.value.trim()) && (r2_bookingName.value.trim()||r2_bookingMobile.value.trim());
+  const anyOtherPartial = !!(r2_dealershipName.value.trim()||r2_dealerLocation.value.trim()||r2_bookingName.value.trim()||r2_bookingMobile.value.trim());
+  if (p1Core && p1Other) return 'RETAIL';
+  if (p1Core) return 'RTLDCR';
+  if (anyOtherPartial) return 'L2_CB';
+  return null;
+}
+function computeL2Booking(){
+  const bk = dispoState.bk;
+  if (!bk.purchase) return null;
+  if (bk.purchase === 'hero') return 'REDIRECT';
+  if (bk.purchase === 'other_bought') return 'LSTP';
+  if (bk.purchase === 'other_planned') return 'LSTNP';
+  if (bk.visited === null) return null;
+  if (bk.visited === 'lost') return 'SV_LOST';
+  if (!bk.timeline) return null;
+  if (bk.timeline === 'lte15') return 'BR';
+  if (bk.timeline === '31to60') return 'INT';
+  if (bk.timeline === '60plus') return 'LSTNP';
+  if (bk.timeline === '16to30') {
+    if (bk.visitSched === null) return null;
+    if (bk.dealerCall === null) return null;
+    if (bk.visitSched === 'yes') return bk.dealerCall === 'yes' ? 'ST_VST' : 'ST_NDC';
+    return bk.dealerCall === 'no' ? 'NDC_INT' : 'L2_CB';
+  }
+  return null;
+}
+
+function setL1Time(v){ dispoState.l1Time=v; refreshDispo(); }
+function setB2Confirmed(v){ dispoState.b2Confirmed=v; refreshDispo(); }
+function setBkPurchase(v){ dispoState.bk={purchase:v,visited:null,timeline:null,visitSched:null,dealerCall:null}; refreshDispo(); }
+function setBkVisited(v){ dispoState.bk.visited=v; dispoState.bk.timeline=null; dispoState.bk.visitSched=null; dispoState.bk.dealerCall=null; refreshDispo(); }
+function setBkTimeline(v){ dispoState.bk.timeline=v; dispoState.bk.visitSched=null; dispoState.bk.dealerCall=null; refreshDispo(); }
+function setBkVisitSched(v){ dispoState.bk.visitSched=v; dispoState.bk.dealerCall=null; refreshDispo(); }
+function setBkDealerCall(v){ dispoState.bk.dealerCall=v; refreshDispo(); }
+function resetDispoAndRefresh(){ resetDispoState(); refreshDispo(); }
+
+function dpQuestionCard(title, options, backOnclick){
+  const backHTML = backOnclick ? `<div class="dpc-back" onclick="${backOnclick}">← Back</div>` : '';
+  const rowsHTML = options.map(o=>`<div class="dpc-row${o.gap ? ' dpc-row-gap' : ''}" onclick="${o.onclick}"><div class="dpc-row-main">${o.label}</div>${o.sub ? `<div class="dpc-row-sub">${o.sub}</div>` : ''}</div>`).join('');
+  return `<div class="bsc">${backHTML}<div class="bsc-block-lbl">${title}</div><div class="dpc-list">${rowsHTML}</div></div>`;
+}
+function dpResultCard(code, backOnclick){
+  const info = DISPO_INFO[code];
+  const backHTML = backOnclick ? `<div class="dpc-back" onclick="${backOnclick}">← Back</div>` : '';
+  return `<div class="bsc">
+    <div class="bsc-block-lbl">Disposition</div>
+    <div class="dpc-dispo">${info.label}</div>
+    <div class="bsc-block-lbl">LMS</div>
+    <div class="dpc-lms">${info.lms}</div>
+    ${backHTML}
+  </div>`;
+}
+function dpNoteCard(msg, backOnclick){
+  const backHTML = backOnclick ? `<div class="dpc-back" onclick="${backOnclick}">← Back</div>` : '';
+  return `<div class="bsc"><div class="bsc-why">ⓘ ${msg}</div>${backHTML}</div>`;
+}
+function dpWaitingCard(msg){
+  return `<div class="bsc"><div class="bsc-empty">${msg}</div></div>`;
+}
+
+function buildDispoPanelHTML(mode){
+  if (mode === 'l1') {
+    const code = computeL1();
+    if (!code) return dpQuestionCard('Buying Timeline', [
+      { label:'Within 1 Month', onclick:"setL1Time('lte1')" },
+      { label:'1–2 Months', onclick:"setL1Time('1to2')" }
+    ]);
+    return dpResultCard(code, "setL1Time(null)");
+  }
+  if (mode === 'l2retail') {
+    const code = computeL2Retail();
+    if (!code) return dpWaitingCard('Fill in the Model and Purchase Date — the disposition will appear here.');
+    return dpResultCard(code, null);
+  }
+  if (mode === 'l2booked') {
+    return dpResultCard('BOOKED', null);
+  }
+  if (mode === 'l2booking') {
+    const bk = dispoState.bk;
+    if (!bk.purchase) return dpQuestionCard('Purchase Status', [
+      { label:'Not Purchased Yet', sub:'Still interested in our models', onclick:"setBkPurchase('none')" },
+      { label:'Already Purchased Hero', sub:'→ Move to Retail Section', onclick:"setBkPurchase('hero')", gap:true },
+      { label:'Purchased Another Brand', sub:'→ LSTP', onclick:"setBkPurchase('other_bought')" },
+      { label:'Planning to Purchase Another Brand', sub:'→ LSTNP', onclick:"setBkPurchase('other_planned')" }
+    ]);
+    if (bk.purchase === 'hero') return dpNoteCard('This is a Retail case — switch to "L2 Retail" mode and fill in the details there.', "setBkPurchase(null)");
+    if (bk.purchase === 'other_bought') return dpResultCard('LSTP', "setBkPurchase(null)");
+    if (bk.purchase === 'other_planned') return dpResultCard('LSTNP', "setBkPurchase(null)");
+    if (bk.visited === null) return dpQuestionCard('Has the Customer Visited the Store?', [
+      { label:'Visited — Not Interested Anymore', onclick:"setBkVisited('lost')" },
+      { label:'Not Visited Yet', onclick:"setBkVisited('notyet')" }
+    ], 'setBkPurchase(null)');
+    if (bk.visited === 'lost') return dpResultCard('SV_LOST', "setBkVisited(null)");
+    if (!bk.timeline) return dpQuestionCard('Buying Timeline', [
+      { label:'Within 15 Days', onclick:"setBkTimeline('lte15')" },
+      { label:'16–30 Days', onclick:"setBkTimeline('16to30')" },
+      { label:'31–60 Days', onclick:"setBkTimeline('31to60')" },
+      { label:'60+ Days / No Plan', onclick:"setBkTimeline('60plus')" }
+    ], "setBkVisited(null)");
+    if (bk.timeline === 'lte15') return dpResultCard('BR', "setBkTimeline(null)");
+    if (bk.timeline === '31to60') return dpResultCard('INT', "setBkTimeline(null)");
+    if (bk.timeline === '60plus') return dpResultCard('LSTNP', "setBkTimeline(null)");
+    if (bk.visitSched === null) return dpQuestionCard('Has a Store Visit Been Scheduled?', [
+      { label:'Yes', onclick:"setBkVisitSched('yes')" },
+      { label:'No', onclick:"setBkVisitSched('no')" }
+    ], "setBkTimeline(null)");
+    if (bk.dealerCall === null) return dpQuestionCard('Did the Dealer Call the Customer?', [
+      { label:'Yes', onclick:"setBkDealerCall('yes')" },
+      { label:'No', onclick:"setBkDealerCall('no')" }
+    ], "setBkVisitSched(null)");
+    const code = bk.visitSched === 'yes' ? (bk.dealerCall === 'yes' ? 'ST_VST' : 'ST_NDC') : (bk.dealerCall === 'no' ? 'NDC_INT' : 'L2_CB');
+    return dpResultCard(code, "setBkDealerCall(null)");
+  }
+  return '';
+}
+
+function refreshDispo(){
+  const panel = document.getElementById('disp-panel');
+  const stage = document.querySelector('.crm-stage');
+  if (!panel || !stage) return;
+  if (!hasAnyInput(currentMode)) {
+    panel.classList.remove('dp-open');
+    panel.setAttribute('aria-hidden','true');
+    stage.classList.remove('stage-wide-left');
+    return;
+  }
+  panel.innerHTML = buildDispoPanelHTML(currentMode);
+  panel.classList.add('dp-open');
+  panel.setAttribute('aria-hidden','false');
+  stage.classList.add('stage-wide-left');
+}
+
 // ─── CUSTOM DROPDOWN ─────────────────────────────────────────────────────
 function buildCustomDrop(wrapperId, triggerId, dropId, items, onSelect, placeholder) {
   const wrapper = document.getElementById(wrapperId);
@@ -556,6 +766,7 @@ function buildModelDropdown() {
   buildCustomDrop('wrap_model','trig_model','drop_model', buildModelItems(), name => {
     document.getElementById('model').value = name;
     pinSpecPanel(buildSpecCardHTML(name));
+    refreshDispo();
   }, 'Select Model');
   attachModelHover('drop_model');
 }
@@ -563,6 +774,7 @@ function buildSectionModelDrop(section, placeholder) {
   buildCustomDrop(`wrap_${section}_model`,`trig_${section}_model`,`drop_${section}_model`, buildModelItems(), name => {
     document.getElementById(`${section}_model`).value = name;
     pinSpecPanel(buildSpecCardHTML(name));
+    refreshDispo();
   }, placeholder || 'Select Model');
   attachModelHover('drop_' + section + '_model');
 }
@@ -589,10 +801,12 @@ document.addEventListener('DOMContentLoaded', () => {
     if (active.classList.contains('cst')) return;
     if (active.tagName==='INPUT' && active.type!=='hidden') { e.preventDefault(); advanceToNext(active); }
   });
+  const boxEl = document.querySelector('.box');
+  if (boxEl) boxEl.addEventListener('input', refreshDispo);
 });
 
 // ─── MODE SWITCHER ───────────────────────────────────────────────────────
-let currentMode = 'l1';
+let currentMode = 'l2booking';
 function setMode(m) {
   currentMode = m;
   document.getElementById('l1Section').classList.toggle('hide', m !== 'l1');
@@ -601,6 +815,8 @@ function setMode(m) {
   document.getElementById('l2RetailSection').classList.toggle('hide', m !== 'l2retail');
   closeAllDropdowns();
   checkWordLimit();
+  resetDispoState();
+  refreshDispo();
 }
 
 // ─── WORD LIMIT (kept structurally, disabled) ────────────────────────────
@@ -699,7 +915,7 @@ function doResetForm() {
   if(typeof unpinSpecPanel==='function') unpinSpecPanel();
   closeAllDropdowns();
   setWordLimitWarning(false);
-  setMode('l1');
+  setMode('l2booking');
 }
 
 // ─── DARK / LIGHT THEME TOGGLE ───────────────────────────────────────────
