@@ -90,6 +90,11 @@ body.dark-mode .clock-box{background:rgba(212,168,67,0.04)!important;border-colo
 body.dark-mode .clock-num{color:var(--hero-gold)!important;}
 body.dark-mode #_reToast{background:rgba(20,20,20,0.95)!important;}
 body.dark-mode .word-limit-banner{color:#FF7F7F!important;}
+body.dark-mode .dcb-label{color:rgba(255,255,255,0.6)!important;}
+body.dark-mode .dcb-wrap{background:rgba(255,255,255,0.07)!important;}
+body.dark-mode .dcb-btn{background:rgba(255,255,255,0.07)!important;color:rgba(255,255,255,0.5)!important;}
+body.dark-mode .dcb-btn:hover{background:rgba(212,168,67,0.16)!important;}
+body.dark-mode .dcb-btn.active{background:rgba(212,168,67,0.16)!important;color:var(--hero-gold)!important;box-shadow:0 0 0 1.5px rgba(212,168,67,0.4) inset!important;}
 body.dark-mode .hbg-panel{background:#0f0f0f!important;border-left-color:rgba(212,168,67,0.09)!important;}
 body.dark-mode .hbg-header{border-bottom-color:rgba(255,255,255,0.06)!important;}
 body.dark-mode .hbg-title{color:rgba(255,255,255,0.82)!important;}
@@ -145,6 +150,13 @@ button{padding:12px;margin:7px 0;cursor:pointer;border:none;border-radius:10px;h
 .word-limit-banner{display:none;margin-top:10px;padding:10px 14px;border-radius:8px;background:rgba(255,127,127,0.12);border:1px solid rgba(255,127,127,0.45);color:#c0392b;font-size:13px;font-weight:600;text-align:center;}
 .word-limit-banner.show{display:block;}
 
+.dcb-wrap{display:flex;align-items:center;justify-content:space-between;gap:10px;background:rgba(0,0,0,0.045);border-radius:10px;padding:0 6px 0 14px;height:48px;margin:8px 0;}
+.dcb-label{font-size:13px;font-weight:600;color:#5a5348;white-space:nowrap;}
+.dcb-btns{display:flex;gap:6px;flex-shrink:0;}
+.dcb-btn{flex:0 0 auto;width:60px;height:36px;border-radius:8px;border:none;background:rgba(0,0,0,0.05);color:#8a8174;font-weight:700;font-size:13px;cursor:pointer;transition:background .15s,color .15s;margin:0;padding:0;}
+.dcb-btn:hover{background:rgba(212,168,67,0.14);}
+.dcb-btn.active{background:rgba(227,24,55,0.12);color:var(--hero-darkred);box-shadow:0 0 0 1.5px rgba(227,24,55,0.35) inset;}
+
 /* ── CUSTOM DROPDOWN ── */
 .csw{margin:8px 0;z-index:1;}
 .csw.open{z-index:10000;}
@@ -181,9 +193,10 @@ button{padding:12px;margin:7px 0;cursor:pointer;border:none;border-radius:10px;h
   transition:flex-basis .36s cubic-bezier(.22,1,.36,1),width .36s cubic-bezier(.22,1,.36,1),margin-right .36s cubic-bezier(.22,1,.36,1),opacity .3s ease;}
 .crm-stage.stage-wide-left #disp-panel{flex:0 0 340px;width:340px;margin-right:24px;pointer-events:auto;}
 #disp-panel.dp-open{opacity:1;}
-#disp-panel .bsc{position:absolute;inset:0;overflow-y:auto;scrollbar-width:thin;scrollbar-color:#cfc6b3 transparent;}
-#disp-panel .bsc::-webkit-scrollbar{width:5px;}
-#disp-panel .bsc::-webkit-scrollbar-thumb{background:#cfc6b3;border-radius:4px;}
+#disp-panel .dp-scroll{position:absolute;inset:0;overflow-y:auto;scrollbar-width:thin;scrollbar-color:#cfc6b3 transparent;}
+#disp-panel .dp-scroll::-webkit-scrollbar{width:5px;}
+#disp-panel .dp-scroll::-webkit-scrollbar-thumb{background:#cfc6b3;border-radius:4px;}
+#disp-panel .bsc + .bsc{margin-top:16px;}
 .dpc-list{padding:4px 20px 14px;}
 .dpc-row{padding:19px 2px;border-bottom:1px solid rgba(20,16,12,0.08);cursor:pointer;transition:background .15s ease;}
 .dpc-row:last-child{border-bottom:none;}
@@ -206,7 +219,7 @@ button{padding:12px;margin:7px 0;cursor:pointer;border:none;border-radius:10px;h
   #disp-panel{flex:0 0 auto;width:min(96vw,500px);margin-right:0;align-self:center;}
   .crm-stage.stage-wide-left #disp-panel{width:min(96vw,500px);margin-right:0;margin-bottom:20px;}
   #disp-panel:not(.dp-open){display:none;}
-  #disp-panel .bsc{position:relative;inset:auto;max-height:70vh;}
+  #disp-panel .dp-scroll{position:relative;inset:auto;max-height:70vh;}
 }
 
 .bsc{position:relative;border-radius:18px;overflow:hidden;background:rgba(255,255,255,0.72);backdrop-filter:blur(24px) saturate(1.3);-webkit-backdrop-filter:blur(24px) saturate(1.3);
@@ -385,6 +398,14 @@ body.dark-mode .re-confirm-cancel{background:#2a2a2a!important;color:#ddd!import
         <input type="hidden" id="b3_model">
         <input id="b3_dealerVisitTime" placeholder="Dealer visit time">
         <input id="b3_expectedPurchaseDate" placeholder="Expected purchase date">
+        <div class="dcb-wrap">
+          <div class="dcb-label">Dealer Callback Received?</div>
+          <div class="dcb-btns">
+            <button type="button" class="dcb-btn" id="dcbYes" onclick="setDealerCallback('yes')">Yes</button>
+            <button type="button" class="dcb-btn" id="dcbNo" onclick="setDealerCallback('no')">No</button>
+          </div>
+        </div>
+        <input type="hidden" id="b3_dealerCallback" value="unknown">
         <input id="b3_dealership" placeholder="Dealership">
         <input id="b3_bookingName" placeholder="Customer Booking name">
         <input id="b3_altNumber" placeholder="Alternate number">
@@ -539,7 +560,7 @@ function attachModelHover(dropId){
   });
 }
 
-// ─── DISPOSITION ENGINE ──────────────────────────────────────────────────
+// ─── DISPOSITION ENGINE (fully automatic — no questions) ─────────────────
 const DISPO_INFO = {
   L1_VRF:  { label:'L1_VRF',  lms:'Schedule Callback' },
   L1_CB:   { label:'Callback', lms:'Schedule Callback' },
@@ -549,22 +570,12 @@ const DISPO_INFO = {
   BR:      { label:'BR',      lms:'Booking request in LMS (Call back in LMS)' },
   ST_VST:  { label:'ST_VST',  lms:'Schedule Dealer visit in LMS' },
   ST_NDC:  { label:'ST_NDC',  lms:'Schedule Dealer visit in LMS' },
-  NDC_INT: { label:'NDC_INT', lms:'Schedule Callback in LMS' },
   SV_LOST: { label:'SV_Lost', lms:'Lost under defined category' },
   INT:     { label:'INT',     lms:'Schedule Callback in LMS' },
   LSTP:    { label:'LSTP',    lms:'Lost under defined category' },
   LSTNP:   { label:'LSTNP',   lms:'Lost under defined category' },
   BOOKED:  { label:'Booked',  lms:'Booking confirmed' }
 };
-
-let dispoState = {
-  l1Time: null,
-  b2Confirmed: null,
-  bk: { purchase:null, visited:null, timeline:null, visitSched:null, dealerCall:null }
-};
-function resetDispoState(){
-  dispoState = { l1Time:null, b2Confirmed:null, bk:{ purchase:null, visited:null, timeline:null, visitSched:null, dealerCall:null } };
-}
 
 function hasAnyInput(mode){
   if (mode === 'l1') return !!(model.value||buyingTime.value||dealerName.value||dealerLoc.value||l1_bookingName.value||altNumber.value||testRide.value||keyEnquiry.value);
@@ -574,127 +585,157 @@ function hasAnyInput(mode){
   return false;
 }
 
-function computeL1(){
-  if (!dispoState.l1Time) return null;
-  return dispoState.l1Time === 'lte1' ? 'L1_VRF' : 'L1_CB';
+// ─── AUTO-DETECT HELPERS (parses free-text date/timeframe fields) ────────
+const _MONTHS = {jan:0,feb:1,mar:2,apr:3,may:4,jun:5,jul:6,aug:7,sep:8,oct:9,nov:10,dec:11};
+function parseDaysFromText(text){
+  if (!text) return null;
+  const t = text.trim().toLowerCase();
+  if (!t) return null;
+  if (/\btoday\b/.test(t)) return 0;
+  if (/\btomorrow\b/.test(t)) return 1;
+  let m = t.match(/(\d+)\s*day/); if (m) return parseInt(m[1],10);
+  m = t.match(/(\d+)\s*week/); if (m) return parseInt(m[1],10)*7;
+  m = t.match(/(\d+)\s*month/); if (m) return parseInt(m[1],10)*30;
+  if (/\bnext week\b/.test(t)) return 7;
+  if (/\bthis week\b/.test(t)) return 3;
+  if (/\bnext month\b/.test(t)) return 30;
+  const today = new Date(); today.setHours(0,0,0,0);
+  m = t.match(/(\d{1,2})[\/\-](\d{1,2})(?:[\/\-](\d{2,4}))?/);
+  if (m) {
+    const day = parseInt(m[1],10), month = parseInt(m[2],10)-1;
+    let year = m[3] ? parseInt(m[3],10) : today.getFullYear();
+    if (year < 100) year += 2000;
+    let target = new Date(year, month, day); target.setHours(0,0,0,0);
+    let diff = Math.round((target-today)/86400000);
+    if (diff < -180) { target = new Date(year+1, month, day); diff = Math.round((target-today)/86400000); }
+    if (diff >= -1) return Math.max(diff,0);
+  }
+  m = t.match(/(\d{1,2})\s*(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[a-z]*/);
+  if (m && _MONTHS[m[2]]!==undefined) {
+    let target = new Date(today.getFullYear(), _MONTHS[m[2]], parseInt(m[1],10)); target.setHours(0,0,0,0);
+    if (target < today) target = new Date(today.getFullYear()+1, _MONTHS[m[2]], parseInt(m[1],10));
+    return Math.round((target-today)/86400000);
+  }
+  m = t.match(/(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[a-z]*\s*(\d{1,2})/);
+  if (m && _MONTHS[m[1]]!==undefined) {
+    let target = new Date(today.getFullYear(), _MONTHS[m[1]], parseInt(m[2],10)); target.setHours(0,0,0,0);
+    if (target < today) target = new Date(today.getFullYear()+1, _MONTHS[m[1]], parseInt(m[2],10));
+    return Math.round((target-today)/86400000);
+  }
+  return null;
 }
+function bucketizeDays(d){
+  if (d <= 15) return 'lte15';
+  if (d <= 30) return '16to30';
+  if (d <= 60) return '31to60';
+  return '60plus';
+}
+
+// ── L1: fully automatic from the "Buying time" field ──
+function computeL1(){
+  const days = parseDaysFromText(buyingTime.value);
+  if (days === null) return { code:null, waiting:'Fill in "Buying time" (e.g. "20 days", "1 month") — the disposition will appear here.' };
+  return { code: days <= 30 ? 'L1_VRF' : 'L1_CB', note:'Detected from the "Buying time" field.' };
+}
+
+// ── L2 Retail: fully automatic from field completeness ──
 function computeL2Retail(){
   const p1Core  = r2_model.value.trim() && r2_dateOfPurchase.value.trim();
   const p1Other = (r2_dealershipName.value.trim()||r2_dealerLocation.value.trim()) && (r2_bookingName.value.trim()||r2_bookingMobile.value.trim());
   const anyOtherPartial = !!(r2_dealershipName.value.trim()||r2_dealerLocation.value.trim()||r2_bookingName.value.trim()||r2_bookingMobile.value.trim());
-  if (p1Core && p1Other) return 'RETAIL';
-  if (p1Core) return 'RTLDCR';
-  if (anyOtherPartial) return 'L2_CB';
-  return null;
+  if (p1Core && p1Other) return { code:'RETAIL' };
+  if (p1Core) return { code:'RTLDCR' };
+  if (anyOtherPartial) return { code:'L2_CB' };
+  return { code:null, waiting:'Fill in the Model and Purchase Date — the disposition will appear here.' };
 }
+
+// ── L2 Booking: fully automatic — visit timing & buying timeline are
+//    auto-detected from the Dealer visit time / Expected purchase date fields.
+//    Dealer Callback is the one thing no field can capture, so it's a toggle.
 function computeL2Booking(){
-  const bk = dispoState.bk;
-  if (!bk.purchase) return null;
-  if (bk.purchase === 'hero') return 'REDIRECT';
-  if (bk.purchase === 'other_bought') return 'LSTP';
-  if (bk.purchase === 'other_planned') return 'LSTNP';
-  if (bk.visited === null) return null;
-  if (bk.visited === 'lost') return 'SV_LOST';
-  if (!bk.timeline) return null;
-  if (bk.timeline === 'lte15') return 'BR';
-  if (bk.timeline === '31to60') return 'INT';
-  if (bk.timeline === '60plus') return 'LSTNP';
-  if (bk.timeline === '16to30') {
-    if (bk.visitSched === null) return null;
-    if (bk.dealerCall === null) return null;
-    if (bk.visitSched === 'yes') return bk.dealerCall === 'yes' ? 'ST_VST' : 'ST_NDC';
-    return bk.dealerCall === 'no' ? 'NDC_INT' : 'L2_CB';
+  const buyDays = parseDaysFromText(b3_expectedPurchaseDate.value);
+  const cb = b3_dealerCallback.value;
+
+  // Top priority: buying within 15 days is always BR, regardless of dealer visit timing.
+  // BR's LMS text itself depends on dealer callback status.
+  if (buyDays !== null && buyDays <= 15) {
+    const lms = cb === 'no' ? 'Booking request in LMS then (No Dealer Connect)' : 'Booking request in LMS then (Schedule Dealer visit) in LMS';
+    return { code:'BR', lms, note:'Detected from the "Expected purchase date" field.' };
   }
-  return null;
+
+  // Next priority: a dealer visit within 30 days (when buying isn't already ≤15 days)
+  const visitDays = parseDaysFromText(b3_dealerVisitTime.value);
+  if (visitDays !== null && visitDays <= 30) {
+    if (cb === 'unknown') return { code:null, waiting:'A dealer visit is scheduled within 30 days — tap "Dealer Callback Received?" above to confirm ST_VST / ST_NDC.' };
+    return { code: cb === 'yes' ? 'ST_VST' : 'ST_NDC', note:'Detected from the "Dealer visit time" field.' };
+  }
+
+  // No near-term dealer visit — fall back to buying timeline
+  if (buyDays === null) return { code:null, waiting:'Fill in "Expected purchase date" (e.g. "10 days", "20/10", "next week") — the disposition will appear here.' };
+  const bucket = bucketizeDays(buyDays);
+  const map = { '16to30':'L2_CB', '31to60':'INT', '60plus':'LSTNP' };
+  return { code: map[bucket], note:'Detected from the "Expected purchase date" field.' };
 }
 
-function setL1Time(v){ dispoState.l1Time=v; refreshDispo(); }
-function setB2Confirmed(v){ dispoState.b2Confirmed=v; refreshDispo(); }
-function setBkPurchase(v){ dispoState.bk={purchase:v,visited:null,timeline:null,visitSched:null,dealerCall:null}; refreshDispo(); }
-function setBkVisited(v){ dispoState.bk.visited=v; dispoState.bk.timeline=null; dispoState.bk.visitSched=null; dispoState.bk.dealerCall=null; refreshDispo(); }
-function setBkTimeline(v){ dispoState.bk.timeline=v; dispoState.bk.visitSched=null; dispoState.bk.dealerCall=null; refreshDispo(); }
-function setBkVisitSched(v){ dispoState.bk.visitSched=v; dispoState.bk.dealerCall=null; refreshDispo(); }
-function setBkDealerCall(v){ dispoState.bk.dealerCall=v; refreshDispo(); }
-function resetDispoAndRefresh(){ resetDispoState(); refreshDispo(); }
-
-function dpQuestionCard(title, options, backOnclick){
-  const backHTML = backOnclick ? `<div class="dpc-back" onclick="${backOnclick}">← Back</div>` : '';
-  const rowsHTML = options.map(o=>`<div class="dpc-row${o.gap ? ' dpc-row-gap' : ''}" onclick="${o.onclick}"><div class="dpc-row-main">${o.label}</div>${o.sub ? `<div class="dpc-row-sub">${o.sub}</div>` : ''}</div>`).join('');
-  return `<div class="bsc">${backHTML}<div class="bsc-block-lbl">${title}</div><div class="dpc-list">${rowsHTML}</div></div>`;
-}
-function dpResultCard(code, backOnclick){
+function dpResultCard(code, note, lmsOverride){
   const info = DISPO_INFO[code];
-  const backHTML = backOnclick ? `<div class="dpc-back" onclick="${backOnclick}">← Back</div>` : '';
+  const lmsText = lmsOverride || info.lms;
+  const noteHTML = note ? `<div class="bsc-why">ⓘ ${note}</div>` : '';
   return `<div class="bsc">
     <div class="bsc-block-lbl">Disposition</div>
     <div class="dpc-dispo">${info.label}</div>
     <div class="bsc-block-lbl">LMS</div>
-    <div class="dpc-lms">${info.lms}</div>
-    ${backHTML}
+    <div class="dpc-lms">${lmsText}</div>
+    ${noteHTML}
   </div>`;
 }
-function dpNoteCard(msg, backOnclick){
-  const backHTML = backOnclick ? `<div class="dpc-back" onclick="${backOnclick}">← Back</div>` : '';
-  return `<div class="bsc"><div class="bsc-why">ⓘ ${msg}</div>${backHTML}</div>`;
+function dpNoteCard(msg){
+  return `<div class="bsc"><div class="bsc-why">ⓘ ${msg}</div></div>`;
 }
 function dpWaitingCard(msg){
   return `<div class="bsc"><div class="bsc-empty">${msg}</div></div>`;
 }
+function dpReferenceCard(){
+  return `<div class="bsc">
+    <div class="bsc-block-lbl">Other Cases (Handle Manually)</div>
+    <div class="bsc-specs">
+      <div class="bsc-row"><span class="bsc-lbl">Already Purchased Hero</span><span class="bsc-val">Switch to "L2 Retail" mode</span></div>
+      <div class="bsc-row"><span class="bsc-lbl">Purchased Another Brand</span><span class="bsc-val">LSTP</span></div>
+      <div class="bsc-row"><span class="bsc-lbl">Planning Another Brand</span><span class="bsc-val">LSTNP</span></div>
+      <div class="bsc-row"><span class="bsc-lbl">Visited, Not Interested</span><span class="bsc-val">SV_Lost</span></div>
+    </div>
+    <div class="bsc-foot">These aren't auto-detected from the form — apply them yourself when they match the call.</div>
+  </div>`;
+}
 
 function buildDispoPanelHTML(mode){
-  if (mode === 'l1') {
-    const code = computeL1();
-    if (!code) return dpQuestionCard('Buying Timeline', [
-      { label:'Within 1 Month', onclick:"setL1Time('lte1')" },
-      { label:'1–2 Months', onclick:"setL1Time('1to2')" }
-    ]);
-    return dpResultCard(code, "setL1Time(null)");
+  let r;
+  if (mode === 'l1') r = computeL1();
+  else if (mode === 'l2retail') r = computeL2Retail();
+  else if (mode === 'l2booked') r = { code:'BOOKED' };
+  else if (mode === 'l2booking') {
+    r = computeL2Booking();
+    const main = !r.code ? dpWaitingCard(r.waiting || 'Fill in the details — the disposition will appear here.') : dpResultCard(r.code, r.note, r.lms);
+    return main + dpReferenceCard();
   }
-  if (mode === 'l2retail') {
-    const code = computeL2Retail();
-    if (!code) return dpWaitingCard('Fill in the Model and Purchase Date — the disposition will appear here.');
-    return dpResultCard(code, null);
-  }
-  if (mode === 'l2booked') {
-    return dpResultCard('BOOKED', null);
-  }
-  if (mode === 'l2booking') {
-    const bk = dispoState.bk;
-    if (!bk.purchase) return dpQuestionCard('Purchase Status', [
-      { label:'Not Purchased Yet', sub:'Still interested in our models', onclick:"setBkPurchase('none')" },
-      { label:'Already Purchased Hero', sub:'→ Move to Retail Section', onclick:"setBkPurchase('hero')", gap:true },
-      { label:'Purchased Another Brand', sub:'→ LSTP', onclick:"setBkPurchase('other_bought')" },
-      { label:'Planning to Purchase Another Brand', sub:'→ LSTNP', onclick:"setBkPurchase('other_planned')" }
-    ]);
-    if (bk.purchase === 'hero') return dpNoteCard('This is a Retail case — switch to "L2 Retail" mode and fill in the details there.', "setBkPurchase(null)");
-    if (bk.purchase === 'other_bought') return dpResultCard('LSTP', "setBkPurchase(null)");
-    if (bk.purchase === 'other_planned') return dpResultCard('LSTNP', "setBkPurchase(null)");
-    if (bk.visited === null) return dpQuestionCard('Has the Customer Visited the Store?', [
-      { label:'Visited — Not Interested Anymore', onclick:"setBkVisited('lost')" },
-      { label:'Not Visited Yet', onclick:"setBkVisited('notyet')" }
-    ], 'setBkPurchase(null)');
-    if (bk.visited === 'lost') return dpResultCard('SV_LOST', "setBkVisited(null)");
-    if (!bk.timeline) return dpQuestionCard('Buying Timeline', [
-      { label:'Within 15 Days', onclick:"setBkTimeline('lte15')" },
-      { label:'16–30 Days', onclick:"setBkTimeline('16to30')" },
-      { label:'31–60 Days', onclick:"setBkTimeline('31to60')" },
-      { label:'60+ Days / No Plan', onclick:"setBkTimeline('60plus')" }
-    ], "setBkVisited(null)");
-    if (bk.timeline === 'lte15') return dpResultCard('BR', "setBkTimeline(null)");
-    if (bk.timeline === '31to60') return dpResultCard('INT', "setBkTimeline(null)");
-    if (bk.timeline === '60plus') return dpResultCard('LSTNP', "setBkTimeline(null)");
-    if (bk.visitSched === null) return dpQuestionCard('Has a Store Visit Been Scheduled?', [
-      { label:'Yes', onclick:"setBkVisitSched('yes')" },
-      { label:'No', onclick:"setBkVisitSched('no')" }
-    ], "setBkTimeline(null)");
-    if (bk.dealerCall === null) return dpQuestionCard('Did the Dealer Call the Customer?', [
-      { label:'Yes', onclick:"setBkDealerCall('yes')" },
-      { label:'No', onclick:"setBkDealerCall('no')" }
-    ], "setBkVisitSched(null)");
-    const code = bk.visitSched === 'yes' ? (bk.dealerCall === 'yes' ? 'ST_VST' : 'ST_NDC') : (bk.dealerCall === 'no' ? 'NDC_INT' : 'L2_CB');
-    return dpResultCard(code, "setBkDealerCall(null)");
-  }
-  return '';
+  else return '';
+
+  if (!r.code) return dpWaitingCard(r.waiting || 'Fill in the details — the disposition will appear here.');
+  return dpResultCard(r.code, r.note);
+}
+
+function setDealerCallback(v){
+  b3_dealerCallback.value = v;
+  updateDcbToggleUI();
+  refreshDispo();
+}
+function updateDcbToggleUI(){
+  const yesBtn = document.getElementById('dcbYes');
+  const noBtn = document.getElementById('dcbNo');
+  if (!yesBtn || !noBtn) return;
+  const v = b3_dealerCallback.value;
+  yesBtn.classList.toggle('active', v === 'yes');
+  noBtn.classList.toggle('active', v === 'no');
 }
 
 function refreshDispo(){
@@ -707,7 +748,7 @@ function refreshDispo(){
     stage.classList.remove('stage-wide-left');
     return;
   }
-  panel.innerHTML = buildDispoPanelHTML(currentMode);
+  panel.innerHTML = '<div class="dp-scroll">' + buildDispoPanelHTML(currentMode) + '</div>';
   panel.classList.add('dp-open');
   panel.setAttribute('aria-hidden','false');
   stage.classList.add('stage-wide-left');
@@ -802,7 +843,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (active.tagName==='INPUT' && active.type!=='hidden') { e.preventDefault(); advanceToNext(active); }
   });
   const boxEl = document.querySelector('.box');
-  if (boxEl) boxEl.addEventListener('input', refreshDispo);
+  if (boxEl) { boxEl.addEventListener('input', refreshDispo); boxEl.addEventListener('change', refreshDispo); }
+  updateDcbToggleUI();
 });
 
 // ─── MODE SWITCHER ───────────────────────────────────────────────────────
@@ -815,7 +857,6 @@ function setMode(m) {
   document.getElementById('l2RetailSection').classList.toggle('hide', m !== 'l2retail');
   closeAllDropdowns();
   checkWordLimit();
-  resetDispoState();
   refreshDispo();
 }
 
@@ -907,6 +948,8 @@ function showConfirm(title, msg, onYes){
 function resetForm() { showConfirm('Reset everything?', 'All entered data will be cleared.', doResetForm); }
 function doResetForm() {
   document.querySelectorAll('input').forEach(el => { if (!el.hasAttribute('readonly')) el.value = ''; });
+  b3_dealerCallback.value = 'unknown';
+  updateDcbToggleUI();
   [['trig_model','Select Model'],['trig_b3_model','Select Model'],
    ['trig_b2_model','Select Booking Model'],['trig_r2_model','Select Model']].forEach(([id,ph]) => {
     const el = document.getElementById(id); if(!el) return;
