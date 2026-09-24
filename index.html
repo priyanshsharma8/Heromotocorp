@@ -635,7 +635,11 @@ function bucketizeDays(d){
 function computeL1(){
   const days = parseDaysFromText(buyingTime.value);
   if (days === null) return { code:null, waiting:'Fill in "Buying time" (e.g. "20 days", "1 month") — the disposition will appear here.' };
-  return { code: days <= 30 ? 'L1_VRF' : 'L1_CB', note:'Detected from the "Buying time" field.' };
+  let code;
+  if (days <= 30) code = 'L1_VRF';
+  else if (days <= 60) code = 'L1_CB';
+  else code = 'LSTNP';
+  return { code, note:'Detected from the "Buying time" field.' };
 }
 
 // ── L2 Retail: fully automatic from field completeness ──
