@@ -305,6 +305,14 @@ body.dark-mode .re-confirm-msg{color:#aaa!important;}
 body.dark-mode .re-confirm-cancel{background:#2a2a2a!important;color:#ddd!important;}
 
 @keyframes entry-shake{0%,100%{transform:translateX(0);}20%{transform:translateX(-6px);}40%{transform:translateX(6px);}60%{transform:translateX(-4px);}80%{transform:translateX(4px);}}
+/* ── DATE HINT INSIDE INPUT ── */
+.date-wrap{margin:8px 0;}
+.date-wrap input{margin:0;padding-right:130px;}
+.date-hint{position:absolute;right:14px;top:50%;transform:translateY(-50%);
+  font-size:13px;font-weight:700;color:var(--hero-darkred);white-space:nowrap;
+  pointer-events:none;opacity:0;transition:opacity .15s ease;font-variant-numeric:tabular-nums;}
+.date-hint.show{opacity:1;}
+body.dark-mode .date-hint{color:var(--hero-gold);}
 </style>
 </head>
 <body>
@@ -630,7 +638,35 @@ function bucketizeDays(d){
   if (d <= 60) return '31to60';
   return '60plus';
 }
+// ─── DATE HINT (shows "today + N days" at the right of the field) ────────
+const DATE_HINT_FIELDS = ['b3_dealerVisitTime','b3_expectedPurchaseDate','b2_expectedPurchaseDate','buyingTime'];
+const _RELATIVE_RE = /(\d+)\s*(day|week|month)|\btoday\b|\btomorrow\b|\bnext (week|month)\b/i;
+const _MN = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 
+function updateDateHint(input){
+  const hint = input._hint; if(!hint) return;
+  const text = input.value;
+  const days = _RELATIVE_RE.test(text) ? parseDaysFromText(text) : null;
+  if (days === null) { hint.classList.remove('show'); hint.textContent = ''; return; }
+  const d = new Date(); d.setHours(0,0,0,0); d.setDate(d.getDate() + days);
+  hint.textContent = d.getDate() + ' ' + _MN[d.getMonth()] + ' ' + d.getFullYear();
+  hint.classList.add('show');
+}
+function updateAllDateHints(){
+  DATE_HINT_FIELDS.forEach(id => { const el = document.getElementById(id); if(el) updateDateHint(el); });
+}
+function initDateHints(){
+  DATE_HINT_FIELDS.forEach(id => {
+    const input = document.getElementById(id); if(!input || input._hint) return;
+    const wrap = document.createElement('div'); wrap.className = 'date-wrap';
+    input.parentNode.insertBefore(wrap, input);
+    wrap.appendChild(input);
+    const hint = document.createElement('span'); hint.className = 'date-hint';
+    wrap.appendChild(hint);
+    input._hint = hint;
+    input.addEventListener('input', () => updateDateHint(input));
+  });
+}
 // ── L1: fully automatic from the "Buying time" field ──
 function computeL1(){
   const days = parseDaysFromText(buyingTime.value);
@@ -839,6 +875,7 @@ function advanceToNext(el) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+  initDateHints();
   buildModelDropdown(); buildSectionModelDrop('b2','Select Booking Model'); buildSectionModelDrop('r2','Select Model'); buildSectionModelDrop('b3','Select Model');
   document.addEventListener('keydown', e => {
     if (e.key !== 'Enter') return;
@@ -951,7 +988,7 @@ function showConfirm(title, msg, onYes){
 // ─── RESET ───────────────────────────────────────────────────────────────
 function resetForm() { showConfirm('Reset everything?', 'All entered data will be cleared.', doResetForm); }
 function doResetForm() {
-  document.querySelectorAll('input').forEach(el => { if (!el.hasAttribute('readonly')) el.value = ''; });
+  document.querySelectorAll('input').forEach(el => { if (!el.hasAttribute('readonly')) el.value = ''; });updateAllDateHints();
   b3_dealerCallback.value = 'unknown';
   updateDcbToggleUI();
   [['trig_model','Select Model'],['trig_b3_model','Select Model'],
